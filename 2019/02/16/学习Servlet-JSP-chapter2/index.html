@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Servlet,Jsp,">
 
 
 
@@ -79,20 +79,21 @@
 
 
 
-<meta name="description" content="模型-视图-控制器(MVC)设计模式 MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑">
+<meta name="description" content="模型-视图-控制器(MVC)设计模式  MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻">
+<meta name="keywords" content="Servlet,Jsp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习Servlet&amp;JSP chapter2">
 <meta property="og:url" content="http://yoursite.com/2019/02/16/学习Servlet-JSP-chapter2/index.html">
 <meta property="og:site_name" content="机智">
-<meta property="og:description" content="模型-视图-控制器(MVC)设计模式 MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑">
+<meta property="og:description" content="模型-视图-控制器(MVC)设计模式  MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/YVNv208.png">
 <meta property="og:image" content="https://i.imgur.com/hlu7wDW.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/811883/201704/811883-20170423150019101-1710764799.jpg">
-<meta property="og:updated_time" content="2019-02-16T07:25:37.505Z">
+<meta property="og:image" content="https://i.imgur.com/iXMx0ML.jpg">
+<meta property="og:updated_time" content="2019-02-16T07:38:37.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习Servlet&amp;JSP chapter2">
-<meta name="twitter:description" content="模型-视图-控制器(MVC)设计模式 MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑">
+<meta name="twitter:description" content="模型-视图-控制器(MVC)设计模式  MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻">
 <meta name="twitter:image" content="https://i.imgur.com/YVNv208.png">
 
 
@@ -307,7 +308,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  815
+                  819
                 </span>
               
 
@@ -344,26 +345,29 @@
       
 
       
-        <h1 id="模型-视图-控制器-MVC-设计模式"><a href="#模型-视图-控制器-MVC-设计模式" class="headerlink" title="模型-视图-控制器(MVC)设计模式"></a>模型-视图-控制器(MVC)设计模式</h1><blockquote>
+        <h1 id="模型-视图-控制器-MVC-设计模式"><a href="#模型-视图-控制器-MVC-设计模式" class="headerlink" title="模型-视图-控制器(MVC)设计模式"></a>模型-视图-控制器(MVC)设计模式</h1><p><br></p>
+<blockquote>
 <p>MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑的图形化用户界面的结构中。</p>
 </blockquote>
 <p>简单的来说，MVC是一种做事习惯，一种行事准则。</p>
 <p>MVC展开就是:M(model)-V(view)-C(control)</p>
-<p>这么讲一个故事吧，一个老板，一个杀手，一个律师。某人以某种行为激怒了老板，老板找到了杀手把这个人干掉了，然后律师根据杀手作案的信息来找漏洞为老板辩护写出辩护书。</p>
+<h3 id="如何理解"><a href="#如何理解" class="headerlink" title="如何理解?"></a>如何理解?</h3><p>这么讲一个故事吧，一个老板，一个杀手，一个律师。某人以某种行为激怒了老板，老板找到了杀手把这个人干掉了，然后律师根据杀手作案的信息来找漏洞为老板辩护写出辩护书。</p>
 <p>老板就是Control，外界输入了信息给他，他去寻找一个模型解决问题。</p>
 <p>杀手就是Model，这个杀手代表着一个逻辑，他只负责处理老板指示的那个人，处理完就走，不用负责打官司(生成HTML)</p>
-<p>律师就是View，他负责处理杀手留下来的信息，即经模型处理后的信息的表达。<img src="https://i.imgur.com/YVNv208.png" alt=""></p>
+<p>律师就是View，他负责处理杀手留下来的信息，即经模型处理后的信息的表达。<br><br><img src="https://i.imgur.com/YVNv208.png" alt=""></p>
 <p>这里给我们的思想就是<strong>各司其职</strong>，老板不用苦练如何杀人和找寻法律漏洞，他只要会调用就行。模型(杀手)只需要关注好自己的逻辑就行，视图(view)只要会利用好杀手留下的信息来生成页面即可。</p>
 <p><img src="https://i.imgur.com/hlu7wDW.png" alt="初级示意图"></p>
-<p>控制器<br>从请求获得用户输入，并明确这些输入对模型有什么影响。告诉模型自行更新，并且让视图(JSP)能得到新的模型状态。</p>
-<p>视图<br>负责表示方面。它从控制器得到模型的状态(不过不是直接得到;控制器会把模型数据放在试图能找到的一个地方)。另外视图还要获得用户的输入，并交给控制器</p>
-<p>模型<br>包含具体的业务逻辑和状态。知道用什么规则来得到或更新状态。系统中唯一可以和数据库通信的部分。</p>
-<p><img src="https://images2015.cnblogs.com/blog/811883/201704/811883-20170423150019101-1710764799.jpg" alt="完全示意图"></p>
+<h4 id="控制器"><a href="#控制器" class="headerlink" title="控制器:"></a><strong>控制器</strong>:</h4><p>从请求获得用户输入，并明确这些输入对模型有什么影响。告诉模型自行更新，并且让视图(JSP)能得到新的模型状态。</p>
+<h4 id="视图"><a href="#视图" class="headerlink" title="视图:"></a><strong>视图</strong>:</h4><p>负责表示方面。它从控制器得到模型的状态(不过不是直接得到;控制器会把模型数据放在试图能找到的一个地方)。另外视图还要获得用户的输入，并交给控制器</p>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型:"></a><strong>模型</strong>:</h4><p>包含具体的业务逻辑和状态。知道用什么规则来得到或更新状态。系统中唯一可以和数据库通信的部分。</p>
+<p><img src="https://i.imgur.com/iXMx0ML.jpg" alt="完全示意图"></p>
 <h2 id="MVC的优缺点一览："><a href="#MVC的优缺点一览：" class="headerlink" title="MVC的优缺点一览："></a>MVC的优缺点一览：</h2><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ol>
 <li>耦合性低。 不至于牵一发而动全身。</li>
 <li>重用性高。 模型可以被多个视图共享，别的应用也可以享受到这个服务。</li>
 <li>部署快，生命周期成本低。编程人员各司其职，java的专注写java，界面程序员专注写界面。</li>
-<li>可维护性高。 分离视图层和业务逻辑层也使得WEB应用更易于维护和修改。<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3></li>
+<li>可维护性高。 分离视图层和业务逻辑层也使得WEB应用更易于维护和修改。</li>
+</ol>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ol>
 <li>调试困难。 构件数量多，而且每个都要经过调试。</li>
 <li>不适合小型、中等规模的应用程序。 MVC的优点在小型系统上体现不出来，反而使编写变得更加麻烦。</li>
 <li>增加了系统结构和实现的复杂性。</li>
@@ -383,6 +387,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Servlet/" rel="tag"># Servlet</a>
+          
+            <a href="/tags/Jsp/" rel="tag"># Jsp</a>
+          
+        </div>
       
 
       
@@ -493,7 +505,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -526,7 +538,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模型-视图-控制器-MVC-设计模式"><span class="nav-number">1.</span> <span class="nav-text">模型-视图-控制器(MVC)设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC的优缺点一览："><span class="nav-number">1.1.</span> <span class="nav-text">MVC的优缺点一览：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点："><span class="nav-number">1.1.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点："><span class="nav-number">1.1.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模型-视图-控制器-MVC-设计模式"><span class="nav-number">1.</span> <span class="nav-text">模型-视图-控制器(MVC)设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何理解"><span class="nav-number">1.0.1.</span> <span class="nav-text">如何理解?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#控制器"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">控制器:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#视图"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">视图:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">模型:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC的优缺点一览："><span class="nav-number">1.1.</span> <span class="nav-text">MVC的优缺点一览：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点："><span class="nav-number">1.1.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点："><span class="nav-number">1.1.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li></ol></div>
             
 
           </div>
