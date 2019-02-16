@@ -79,20 +79,21 @@
 
 
 
-<meta name="description" content="在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。 首先我们了解一下什么是Tomcat。 Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。 Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。  图中的Server即代表着Tomcat。 为什么我们要使用To">
+<meta name="description" content="模型-视图-控制器(MVC)设计模式 MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简单了解Tomcat">
-<meta property="og:url" content="http://yoursite.com/2019/02/16/简单了解Tomcat/index.html">
+<meta property="og:title" content="学习Servlet&amp;JSP chapter2">
+<meta property="og:url" content="http://yoursite.com/2019/02/16/学习Servlet-JSP-chapter2/index.html">
 <meta property="og:site_name" content="机智">
-<meta property="og:description" content="在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。 首先我们了解一下什么是Tomcat。 Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。 Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。  图中的Server即代表着Tomcat。 为什么我们要使用To">
+<meta property="og:description" content="模型-视图-控制器(MVC)设计模式 MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/mSljGmI.png">
-<meta property="og:image" content="https://i.imgur.com/l27jnTM.png">
-<meta property="og:updated_time" content="2019-02-16T06:27:07.188Z">
+<meta property="og:image" content="https://i.imgur.com/YVNv208.png">
+<meta property="og:image" content="https://i.imgur.com/hlu7wDW.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/811883/201704/811883-20170423150019101-1710764799.jpg">
+<meta property="og:updated_time" content="2019-02-16T07:25:37.505Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简单了解Tomcat">
-<meta name="twitter:description" content="在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。 首先我们了解一下什么是Tomcat。 Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。 Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。  图中的Server即代表着Tomcat。 为什么我们要使用To">
-<meta name="twitter:image" content="https://i.imgur.com/mSljGmI.png">
+<meta name="twitter:title" content="学习Servlet&amp;JSP chapter2">
+<meta name="twitter:description" content="模型-视图-控制器(MVC)设计模式 MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑">
+<meta name="twitter:image" content="https://i.imgur.com/YVNv208.png">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/16/简单了解Tomcat/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/16/学习Servlet-JSP-chapter2/">
 
 
 
 
 
-  <title>简单了解Tomcat | 机智</title>
+  <title>学习Servlet&JSP chapter2 | 机智</title>
   
 
 
@@ -245,7 +246,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/简单了解Tomcat/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/学习Servlet-JSP-chapter2/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ymon">
@@ -262,7 +263,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">简单了解Tomcat</h1>
+          <h1 class="post-title" itemprop="name headline">学习Servlet&JSP chapter2</h1>
         
 
         <div class="post-meta">
@@ -274,7 +275,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T13:51:54+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T14:38:18+08:00">
                 2019-02-16
               </time>
             
@@ -306,7 +307,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  639
+                  815
                 </span>
               
 
@@ -343,40 +344,31 @@
       
 
       
-        <p>在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。</p>
-<h4 id="首先我们了解一下什么是Tomcat。"><a href="#首先我们了解一下什么是Tomcat。" class="headerlink" title="首先我们了解一下什么是Tomcat。"></a>首先我们了解一下什么是Tomcat。</h4><blockquote>
-<p><strong>Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。</strong></p>
-<p>Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。</p>
+        <h1 id="模型-视图-控制器-MVC-设计模式"><a href="#模型-视图-控制器-MVC-设计模式" class="headerlink" title="模型-视图-控制器(MVC)设计模式"></a>模型-视图-控制器(MVC)设计模式</h1><blockquote>
+<p>MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑的图形化用户界面的结构中。</p>
 </blockquote>
-<p><img src="https://i.imgur.com/mSljGmI.png" alt=""><br>图中的Server即代表着Tomcat。</p>
-<h3 id="为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？"><a href="#为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？" class="headerlink" title="为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？"></a>为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？</h3><p>下面归纳一下容器的主要功能</p>
-<ol>
-<li>通信支持<br> 容器能为编程人员在servlet和客户之间搭上一栋桥梁，无需自己建立ServerSocket、监听端口、创建流。容器和Web服务器还达成了既定的协议，不必担心Web代码中的API。</li>
-<li>生命周期管理<br> 容器负责创建servlet，也负责销毁servlet。**加载类、实例化、初始化servlet、调用servlet方法，垃圾回收等，都是由容器负责</li>
-<li>多线程支持<br> 容器负责为每个请求建立线程，并管理线程的运作。</li>
-<li>声明方式实现安全<br> 可以使用XML部署描述文件来配置安全性，易修改。</li>
-<li>JSP支持 容器负责把JSP翻译成JAVA</li>
+<p>简单的来说，MVC是一种做事习惯，一种行事准则。</p>
+<p>MVC展开就是:M(model)-V(view)-C(control)</p>
+<p>这么讲一个故事吧，一个老板，一个杀手，一个律师。某人以某种行为激怒了老板，老板找到了杀手把这个人干掉了，然后律师根据杀手作案的信息来找漏洞为老板辩护写出辩护书。</p>
+<p>老板就是Control，外界输入了信息给他，他去寻找一个模型解决问题。</p>
+<p>杀手就是Model，这个杀手代表着一个逻辑，他只负责处理老板指示的那个人，处理完就走，不用负责打官司(生成HTML)</p>
+<p>律师就是View，他负责处理杀手留下来的信息，即经模型处理后的信息的表达。<img src="https://i.imgur.com/YVNv208.png" alt=""></p>
+<p>这里给我们的思想就是<strong>各司其职</strong>，老板不用苦练如何杀人和找寻法律漏洞，他只要会调用就行。模型(杀手)只需要关注好自己的逻辑就行，视图(view)只要会利用好杀手留下的信息来生成页面即可。</p>
+<p><img src="https://i.imgur.com/hlu7wDW.png" alt="初级示意图"></p>
+<p>控制器<br>从请求获得用户输入，并明确这些输入对模型有什么影响。告诉模型自行更新，并且让视图(JSP)能得到新的模型状态。</p>
+<p>视图<br>负责表示方面。它从控制器得到模型的状态(不过不是直接得到;控制器会把模型数据放在试图能找到的一个地方)。另外视图还要获得用户的输入，并交给控制器</p>
+<p>模型<br>包含具体的业务逻辑和状态。知道用什么规则来得到或更新状态。系统中唯一可以和数据库通信的部分。</p>
+<p><img src="https://images2015.cnblogs.com/blog/811883/201704/811883-20170423150019101-1710764799.jpg" alt="完全示意图"></p>
+<h2 id="MVC的优缺点一览："><a href="#MVC的优缺点一览：" class="headerlink" title="MVC的优缺点一览："></a>MVC的优缺点一览：</h2><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ol>
+<li>耦合性低。 不至于牵一发而动全身。</li>
+<li>重用性高。 模型可以被多个视图共享，别的应用也可以享受到这个服务。</li>
+<li>部署快，生命周期成本低。编程人员各司其职，java的专注写java，界面程序员专注写界面。</li>
+<li>可维护性高。 分离视图层和业务逻辑层也使得WEB应用更易于维护和修改。<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3></li>
+<li>调试困难。 构件数量多，而且每个都要经过调试。</li>
+<li>不适合小型、中等规模的应用程序。 MVC的优点在小型系统上体现不出来，反而使编写变得更加麻烦。</li>
+<li>增加了系统结构和实现的复杂性。</li>
+<li>视图与控制器间的过于紧密的连接并且降低了视图对模型数据的访问。</li>
 </ol>
-<h2 id="容器如何接受一个请求"><a href="#容器如何接受一个请求" class="headerlink" title="容器如何接受一个请求"></a>容器如何接受一个请求</h2><ol>
-<li>确认是否找的就是Servlet，如果只是单纯的拿取文件就不需要用到servlet。</li>
-<li>建立HttpServletRequest，HttpServletResponse，两个对象。</li>
-<li>找到Servlet，分配线程，传递Req、Res对象给相对应的Servlet</li>
-<li>收到请求对象的Servlet根据请求类型调用响应方法。</li>
-<li>第四条生成的页面会被填在响应对象里面.</li>
-<li>响应对象返回给客户   </li>
-</ol>
-<p>上面第三点提到了，容器要找到一个特定的Servlet，再去为他分配线程。<br>出于安全考虑，容器是通过映射来找到Servlet的，每个Servlet可以有三个名称。</p>
-<blockquote>
-<ol>
-<li>实际类名(完全限定名)</li>
-<li>部署名(内部名)</li>
-<li>公共URL名称(公共URL名)     </li>
-</ol>
-</blockquote>
-<p>ps.这样的做法让我们不用暴露目录结构，也更方便后期文件的调整。</p>
-<p><strong>容器会在某特定位置按照映射名称查找全部servlet</strong></p>
-<p>客户直接看到的是公共的URL名称，部署名是编程人员自个知道的秘密名称。在部署描述文件(DD)中写好之间的映射，如图。<br><img src="https://i.imgur.com/l27jnTM.png" alt=""></p>
-<p>想了解Apache和Tomcat的关联和区别：<br><a href="https://www.cnblogs.com/zangdalei/p/8057325.html" target="_blank" rel="noopener">https://www.cnblogs.com/zangdalei/p/8057325.html</a><br><a href="https://www.cnblogs.com/zaifeng0108/p/7226380.html" target="_blank" rel="noopener">https://www.cnblogs.com/zaifeng0108/p/7226380.html</a>                                                                                                                                                                                                                                                                                                        </p>
 
       
     </div>
@@ -401,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/08/学习Servlet-JSP-chapter1/" rel="next" title="学习Servlet&JSP chapter1">
-                <i class="fa fa-chevron-left"></i> 学习Servlet&JSP chapter1
+              <a href="/2019/02/16/简单了解Tomcat/" rel="next" title="简单了解Tomcat">
+                <i class="fa fa-chevron-left"></i> 简单了解Tomcat
               </a>
             
           </div>
@@ -410,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/16/学习Servlet-JSP-chapter2/" rel="prev" title="学习Servlet&JSP chapter2">
-                学习Servlet&JSP chapter2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -538,7 +526,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先我们了解一下什么是Tomcat。"><span class="nav-number">1.</span> <span class="nav-text">首先我们了解一下什么是Tomcat。</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？"><span class="nav-number"></span> <span class="nav-text">为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器如何接受一个请求"><span class="nav-number"></span> <span class="nav-text">容器如何接受一个请求</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模型-视图-控制器-MVC-设计模式"><span class="nav-number">1.</span> <span class="nav-text">模型-视图-控制器(MVC)设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC的优缺点一览："><span class="nav-number">1.1.</span> <span class="nav-text">MVC的优缺点一览：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点："><span class="nav-number">1.1.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点："><span class="nav-number">1.1.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
