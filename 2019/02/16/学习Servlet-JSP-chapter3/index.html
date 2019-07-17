@@ -88,7 +88,7 @@
 <meta property="og:description" content="了解Servlet的一生 用户点击一个URL，指向一个Servlet，容器接收到信息。 容器创建请求对象、响应对象 容器寻找特定的Servlet，并加载类 容器调用Servlet构造函数，并分配线程。 调用Init()函数，初始化servlet。 调用service方法，并传递请求、响应对象。 根据Http方法头选择方法，doGet()/doPost()。 调用destroy()，回收servle">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/iFT6Iwg.png">
-<meta property="og:updated_time" content="2019-02-16T14:07:41.195Z">
+<meta property="og:updated_time" content="2019-02-16T14:09:41.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习Servlet&amp;JSP chapter3">
 <meta name="twitter:description" content="了解Servlet的一生 用户点击一个URL，指向一个Servlet，容器接收到信息。 容器创建请求对象、响应对象 容器寻找特定的Servlet，并加载类 容器调用Servlet构造函数，并分配线程。 调用Init()函数，初始化servlet。 调用service方法，并传递请求、响应对象。 根据Http方法头选择方法，doGet()/doPost()。 调用destroy()，回收servle">
@@ -306,7 +306,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  435
+                  442
                 </span>
               
 
@@ -358,7 +358,8 @@
 <p><img src="https://i.imgur.com/iFT6Iwg.png" alt=""></p>
 <p></p>
 <h2 id="了解请求和响应"><a href="#了解请求和响应" class="headerlink" title="了解请求和响应"></a>了解请求和响应</h2><ol>
-<li>了解请求<ol>
+<li><p>了解请求</p>
+<ol>
 <li>每一个请求都在单独的一个线程中运行。</li>
 <li>对于每一个请求都会生成其独有请求、响应对象。</li>
 <li>默认使用Get方法</li>
@@ -370,29 +371,26 @@
 </li>
 </ol>
 </li>
-</ol>
-<p>### </p>
-<ol start="2">
 <li><p>了解响应</p>
 <ol>
 <li>setContentType()和getWriter()比较常用</li>
 <li>使用JSP来完成I/O</li>
 <li>返回的必须要是MIME类型文件。</li>
 <li>分清字节和字符输出。</li>
-<li>通过setHeader(),addHeader()等调整相应首部，如发送错误，增加cookie等。<h3 id="重定向和请求分派的区别"><a href="#重定向和请求分派的区别" class="headerlink" title="重定向和请求分派的区别"></a>重定向和请求分派的区别</h3></li>
-<li>重定向是通过sendRedirect(aString)来实现，把新请求发给新的URL。</li>
-<li>重定向是用户可见的，会改变浏览器地址栏的URL。</li>
-<li>重定向是客户来完成工作的。</li>
-<li>若响应已提交，则无法使用重定向。</li>
-<li>请求分派是通过各司其职来完成工作的，如调用JSP。</li>
-<li>请求分派用户不可见。</li>
-<li><p>请求分派是服务端完成工作。</p>
-<p>重定向是告诉浏览器访问另外一个URL，而请求分派只是把请求传递给了服务器上的另一个组件。</p>
-</li>
+<li>通过setHeader(),addHeader()等调整相应首部，如发送错误，增加cookie等。</li>
 </ol>
 </li>
 </ol>
+<h3 id="重定向和请求分派的区别"><a href="#重定向和请求分派的区别" class="headerlink" title="重定向和请求分派的区别"></a>重定向和请求分派的区别</h3><pre><code>1. 重定向是通过sendRedirect(aString)来实现，把新请求发给新的URL。
+2. 重定向是用户可见的，会改变浏览器地址栏的URL。
+3. 重定向是客户来完成工作的。
+4. 若响应已提交，则无法使用重定向。
+5. 请求分派是通过各司其职来完成工作的，如调用JSP。
+6. 请求分派用户不可见。
+7. 请求分派是服务端完成工作。
 
+重定向是告诉浏览器访问另外一个URL，而请求分派只是把请求传递给了服务器上的另一个组件。
+</code></pre>
       
     </div>
     
@@ -433,6 +431,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/17/Mybatis学习笔记-一/" rel="prev" title="Mybatis学习笔记(一)">
+                Mybatis学习笔记(一) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -511,7 +513,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -524,7 +526,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

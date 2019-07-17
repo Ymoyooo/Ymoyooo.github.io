@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Mybatis核心部件与基本实现 1、Mybatis的作用与优点:   Mybatis核心就是操作数据库，仍是一种ORM的实现框架，JDBC的封装使用。Mybatis支持动态SQL功能、不屏蔽SQL、提供Mapper接口编程，配置Mybatis可使用注解、XML文件，从而建立起数据库与接口、POJO之间的映射关系。除此之外，mybatis上手方便，只需要配置好xml文件，建好pojo与接口即可。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="机智">
+<meta property="og:url" content="http://yoursite.com/未发布的/mybatis_chapter1.html">
+<meta property="og:site_name" content="机智">
+<meta property="og:description" content="Mybatis核心部件与基本实现 1、Mybatis的作用与优点:   Mybatis核心就是操作数据库，仍是一种ORM的实现框架，JDBC的封装使用。Mybatis支持动态SQL功能、不屏蔽SQL、提供Mapper接口编程，配置Mybatis可使用注解、XML文件，从而建立起数据库与接口、POJO之间的映射关系。除此之外，mybatis上手方便，只需要配置好xml文件，建好pojo与接口即可。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/17/ZLoBkV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/17/ZqxcDS.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/17/ZL9OL6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/17/ZLUvFK.png">
+<meta property="og:updated_time" content="2019-07-17T12:12:29.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机智">
+<meta name="twitter:description" content="Mybatis核心部件与基本实现 1、Mybatis的作用与优点:   Mybatis核心就是操作数据库，仍是一种ORM的实现框架，JDBC的封装使用。Mybatis支持动态SQL功能、不屏蔽SQL、提供Mapper接口编程，配置Mybatis可使用注解、XML文件，从而建立起数据库与接口、POJO之间的映射关系。除此之外，mybatis上手方便，只需要配置好xml文件，建好pojo与接口即可。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/07/17/ZLoBkV.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/未发布的/mybatis_chapter1.html">
+
+
+
+
+
+  <title> | 机智</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">机智</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline"></h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <h1 id="Mybatis核心部件与基本实现"><a href="#Mybatis核心部件与基本实现" class="headerlink" title="Mybatis核心部件与基本实现"></a>Mybatis核心部件与基本实现</h1><hr>
+<h2 id="1、Mybatis的作用与优点"><a href="#1、Mybatis的作用与优点" class="headerlink" title="1、Mybatis的作用与优点"></a>1、Mybatis的作用与优点</h2><p>:   Mybatis核心就是操作数据库，仍是一种ORM的实现框架，JDBC的封装使用。Mybatis支持动态SQL功能、不屏蔽SQL、提供Mapper接口编程，配置Mybatis可使用注解、XML文件，从而建立起数据库与接口、POJO之间的映射关系。除此之外，mybatis上手方便，只需要配置好xml文件，建好pojo与接口即可。</p>
+<h2 id="2、Mybatis的核心部件"><a href="#2、Mybatis的核心部件" class="headerlink" title="2、Mybatis的核心部件"></a>2、Mybatis的核心部件</h2><p>在这节我们简单的介绍一下核心部件，并使用XML文件配置的方式的实现增删查改动作。总的关系图参考图[1]    </p>
+<p align="center">图：核心部件间的关系</p><br><div align="center"><img width="650" height="450" src="https://s2.ax1x.com/2019/07/17/ZLoBkV.png"></div><br><br><br>###2.1 SqlSessionFactoryBuilder(构造器)<br><br><strong>采用分布构建的Builder模式，根据配置(XML文件)或者代码来生成SqlSessionFactory。</strong><br><br>###2.2 SqlSessionFactory(工厂接口)<br><br><strong>Factory是数据库的连接池，提供最核心的SqlSession接口。</strong><br><br>1. 构建SqlSessionFactory接口可通过<strong>代码配置</strong>和<strong>XML文件配置</strong>来完成。<br>2. 通过比较对比后，私认为还是XML方式要来的方便，因为不用直接修改源码，通过配置XML文件即可达到目的。<br>3. (可跳过)读取XML文件后Mybatis会有几个类负责解析，像BaseBuilder、XMLConfigBuilder类等，最终的目的就是生成一个Configuration对象。由于是初步了解，这里不做赘述。<br><div align="center"><img width="650" height="450" src="https://s2.ax1x.com/2019/07/17/ZqxcDS.md.png"></div><br><p align="center">图：SqlSessionFactory的生成</p>
+
+
+<blockquote>
+<p>Mybatis的SqlSessionFactory对象是数据库连接池，是每个Mybatis应用连接数据库的接口。其唯一作用就是生成接口对象SqlSession。此外线程池最好实现单例模式(后面会实现给大家看)，这样能有效的管理好数据库连接池，避免出现连接资源被消耗殆尽导致宕机。</p>
+</blockquote>
+<p style="font-size:20px">具体实现：</p><br>1. XML文件分为两种一种是我们一会要用到的<strong>基础配置文件</strong>，主要负责配置上下文和运行环境(mysql的连接鸭)。后面要用到的<strong>映射文件</strong>，也称为Mapper，主要负责配置映射关系。<br>2. 使用IDEA的可以提前创建好模板，方便后面使用，具体方法就是setting-&gt;File and Code Templates-&gt;File<br>3. 命名为mybatis-config.xml注意路径，最好放置于项目src目录下。<br>4. 由于配置问题，没办法把整个XML内容复制出来，请把内容嵌入到configuration标签下，不要忘了&lt;?xml..&gt;的内容。<br>5. 配置完后，可以生成SqlSessionFactory了，参考代码1<br><p align="center">第四点：MyBatis的基础配置文件configuration内容配置</p><br>    <configuration><br>    <!--typeAlias元素定义了别名Role，type指向的是一个类的全限定名，定义后Mybatis上下文中都可以用别名替代权限全限定名--><br>         <typealiases><br>             <typealias type="com.learn.ssm.post_chapter3.pojo.Role" alias="role"><br>         </typealias></typealiases><br>         <environments default="development"><br>             <environment id="development"><br>             <!--transactionManager是配置事务管理器，我们采用JDBC管理器模式--><br>                 <transactionmanager type="JDBC"></transactionmanager><br>                 <!--dataSource为元素配置数据库,type属性可以先不做了解后面会提及，表示会采用Mybatis内部提供的连接池方式--><br>               <datasource type="POOLED"><br>               <!--相信大家已经看出来了 以下的都是配置数据库连接的信息 大家根据自己情况更改--><br>               <!--驱动请大家根据自己的版本选择--><br>                     <property name="driver" value="com.mysql.cj.jdbc.Driver"><br>                    <property name="url" value="jdbc:mysql://localhost:3306/ssm?serverTimezone=UTC"><br>                     <property name="username" value="root"><br>                     <property name="password" value="123456789"><br>                 </property></property></property></property></datasource><br>             </environment><br>         </environments><br>         <!--代表引入的Mapper映射器，需要用到的Mapper都需要引入。--><br>         <mappers><br>             <mapper resource="com/learn/ssm/post_chapter3/mapper/RoleMapper.xml"><br>         </mapper></mappers><br>     </configuration><br><br><p align="center">代码[1]：使用XML构建SqlSessionFactory</p><br>    SqlSessionFactory sqlSessionFactory = null;<br>    //我的配置文件是放置于post_chapter3包的目录下的，<strong>请根据自己情况更改</strong>Z<br>    String resoures = “com/learn/ssm/post_chapter3/mybatis-config.XML”;<br>    inputStream = Resources.getResourceAsStream(resoures);<br>    try {<br>            inputStream = Resources.getResourceAsStream(resource);<br>            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);<br>        } catch (IOException e) {<br>            e.printStackTrace();<br>            return null;<br>        }<br><br><p align="center">图：生成XML基础配置文件的模板</p><br><div align="center"><img width="650" height="450" src="https://s2.ax1x.com/2019/07/17/ZL9OL6.png"></div><br><br>———-<br>### 2.3 SqlSession(会话) <p align="center" style="font:bold"> <strong>连接数据库的主要操作接口，可以直接发送SQL也可以通过获取Mapper来发送SQL (主要推荐后者。</strong> </p>
+
+
+<ol>
+<li>SqlSession的作用类似于与一个JDBC的Connection对象，代表一个链接资源的启用</li>
+<li>作用主要是获得Mapper接口、发送SQL给数据库、控制数据库事务。</li>
+<li>使用SqlSessionFactory创建SqlSession,参考代码[2]</li>
+</ol>
+<p></p>
+
+<pre><code>//定义SqlSession
+SqlSession sqlSession = null;
+try{
+//打开SqlSession会话
+sqlSession = SqlSessionFactory.openSession();
+//直接发送Sql或者使用Mapper来发送Sql。
+sqlSession.commit();
+}catch(Exception ex){
+  sqlSession.rollback;
+  ex.printStackTrace();
+}finally{
+  if(sqlSession!=null){
+    sqlSession.close();
+  }
+}
+</code></pre><hr>
+<p>###2.4 SQL Mapper(映射器)<br><strong>由Java接口配合XMl/注解构成，包含着SQL和映射规则，主要由它负责发送SQL去执行。</strong></p>
+<ol>
+<li><p>配置的内容如下</p>
+<ol>
+<li><p>描述映射规则</p>
+</li>
+<li><p>提供SQL语句，配置SQL参数类型、返回类型、缓存刷新等。</p>
+</li>
+<li><p>提供动态SQL。</p>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li>映射器要配合POJO使用，定义一个pojo，Role类。代码[3]</li>
+</ol>
+<p align="center" style="font:bold">代码[3]:Role类</p>
+
+<pre><code>public class Role {
+private String roleName;
+private String note;
+private int age;
+/*getter and setter*/
+}
+</code></pre><ol start="3">
+<li><p><strong>映射器主要作用是将SQL的数据和POJO类关联起来，把数据相互映射</strong></p>
+</li>
+<li><p>Mybatis使用<strong>动态代理技术</strong>使得接口+xml/注解就生成一个<strong>代理对象</strong>，代其执行相关逻辑。</p>
+</li>
+<li><p>使用XML实现映射器</p>
+<ol>
+<li><p>实现相应的接口RoleMapper。代码[4]</p>
+</li>
+<li><p>创建相应的Mapper文件，即RoleMapper.xml文件</p>
+</li>
+<li><p>记得XML基础配置文件中已经引入相对应的Mapper.xml文件(已经引入过了)</p>
+</li>
+<li><p>Mapper和接口那第一次看可能会比较绕，可参考图[2]</p>
+</li>
+</ol>
+</li>
+<li>除了XML实现外还可以通过注解实现映射器，在XML与注解同时定义的时候XML文件会覆盖掉注解，且通过xml文件配置更加方便，不用修改源码，故推荐XML方式。使用注解方式可以参考代码[6]</li>
+</ol>
+<p align="center" style="font:bold">代码[5]:RoleMapper.XML</p><br>    &lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>    &lt;!DOCTYPE mapper<br>        PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN”<br>        “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</a><br><br>    /<em>mapper的namespace属性指定的是相对应的接口类。</em>/<br><br>    <mapper namespace="com.learn.ssm.post_chapter3.mapper.RoleMapper"><br><br>    /<em>select语句的属性id的值是该SQL的标识</em>/<br>    /<em>大家可以留意，select语句的id和对应接口的方法名是一样的</em>/<br>    /<em>parameterType是传入参数的类型，resultType是返回类型。role为别名</em>/<br>    /<em>sql的字段名称一定要与返回类型(role)对应上</em>/<br>    /<em>role_name as roleName就使得数据库字段与Role的成员名称对应上</em>/<br><br>    <select id="getRole" parametertype="int" resulttype="role"><br>        select id,role_name as roleName,note from t_role where id = #{id}<br>    </select><br><br>    </mapper><br><br><p align="center">图：RoleMapper.xml与RoleMapper类间的关系</p><br><div align="center"><img width="650" height="250" src="https://s2.ax1x.com/2019/07/17/ZLUvFK.png"></div><br><br><p align="center" style="font:bold">代码[6]:注解方式实现映射器</p>
+
+<pre><code>package com.learn.ssm.post_chapter3.mapper;
+
+import com.learn.ssm.post_chapter3.pojo.Role;
+
+public interface RoleMapper2 {
+    @select(&quot; select id,role_name as roleName,note from t_role where id = #{id}&quot;)
+public Role getRole(int id);
+}
+</code></pre><hr>
+<h3 id="使用SqlSession和Mapper发送SQL的区别"><a href="#使用SqlSession和Mapper发送SQL的区别" class="headerlink" title="使用SqlSession和Mapper发送SQL的区别"></a>使用SqlSession和Mapper发送SQL的区别</h3><p>前面提到，有两种方式使用SqlSession发送SQL。分别是SqlSession和使用Mapper接口发送。在使用过程中更推荐后者。使用Mapper接口编程，<strong>可读性更强，更能体现面向对象的性质</strong>。此外，使用Mapper编程更方便定位错误，而前者只有在运行中才会出现报错，难以定位。</p>
+<p></p><p align="center" style="font-bold">SqlSession发送SQL方式</p><br>    Role role = (role)sqlSession.<br>    selectOne(“com….RoleMapper.getRole”,1);<p></p>
+<p></p><p align="center" style="font-bold">Mapper接口发送SQL方式</p><br>    RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);<br>    Role role = roleMapper.getRole(1);<p></p>
+<p>##结尾<br>重温一下本节的内容。Mybatis的四个重要组成部件,SqlSessionFactoryBuilder,SqlSessionFactory,SqlSession,映射器。<br>SqlSessionFactoryBuilder使用基础配置文件生成SqlSessionFactory对象，SqlSessionFactory作为数据库池当需要时可以生成SqlSession对象，因而最好实现单例化。<br>SqlSession作为Mybatis核心的接口，可以直接/间接(通过Mapper)来发送SQL执行。<br>映射器由接口和XML(Mapper.xml)来组成，数据库的数据需要与POJO类的成员对应上。<br>通过XML可用作基础配置文件，作用是配置上下文和环境。XML还可以配置映射器，XML配合接口使用可以实现通过Mapper表示SQL。</p>
+<p>ps:主要是学习笔记，如果后期学习发现错漏会及时更正。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Ymon">
+            
+              <p class="site-author-name" itemprop="name">Ymon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis核心部件与基本实现"><span class="nav-number">1.</span> <span class="nav-text">Mybatis核心部件与基本实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Mybatis的作用与优点"><span class="nav-number">1.1.</span> <span class="nav-text">1、Mybatis的作用与优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Mybatis的核心部件"><span class="nav-number">1.2.</span> <span class="nav-text">2、Mybatis的核心部件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用SqlSession和Mapper发送SQL的区别"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用SqlSession和Mapper发送SQL的区别</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ymon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
