@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Servlet,Jsp,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,19 @@
 
 
 
-<meta name="description" content="前言这是一条自己摸索的学习过程这是刚开始记录自己的学习路程，希望能做好记录，温故而知新。学习完Java后很自然的接触到了JavaWeb。在自己想学习的过程中，仿佛有一层迷雾一般，不知道如何开始学习，懵逼了很久。经常看被人说Spring框架，xxx框架，就很好奇，想着有空把它学了，去了解才知道原来要有很多知识支撑才可以深入的去学一个框架。像Java语法基础，数据库，都要了解学习，才慢慢的去接触主流框">
-<meta name="keywords" content="Servlet,Jsp">
+<meta name="description" content="Java反射机制 Java反射机制的作用  在学习的时候频繁的遇到了反射的问题,写博客有利于理清思路.所以写这篇博客来理清反射的关系,谈到反射,先给出定义.  Java反射机制定义 JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。   1.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习Servlet&amp;JSP chapter1">
-<meta property="og:url" content="http://yoursite.com/2019/02/08/学习Servlet-JSP-chapter1/index.html">
+<meta property="og:title" content="机智">
+<meta property="og:url" content="http://yoursite.com/2019/07/26/Java反射/index.html">
 <meta property="og:site_name" content="机智">
-<meta property="og:description" content="前言这是一条自己摸索的学习过程这是刚开始记录自己的学习路程，希望能做好记录，温故而知新。学习完Java后很自然的接触到了JavaWeb。在自己想学习的过程中，仿佛有一层迷雾一般，不知道如何开始学习，懵逼了很久。经常看被人说Spring框架，xxx框架，就很好奇，想着有空把它学了，去了解才知道原来要有很多知识支撑才可以深入的去学一个框架。像Java语法基础，数据库，都要了解学习，才慢慢的去接触主流框">
+<meta property="og:description" content="Java反射机制 Java反射机制的作用  在学习的时候频繁的遇到了反射的问题,写博客有利于理清思路.所以写这篇博客来理清反射的关系,谈到反射,先给出定义.  Java反射机制定义 JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。   1.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-08T08:41:23.298Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/26/euJHl6.png">
+<meta property="og:updated_time" content="2019-07-28T08:28:43.085Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习Servlet&amp;JSP chapter1">
-<meta name="twitter:description" content="前言这是一条自己摸索的学习过程这是刚开始记录自己的学习路程，希望能做好记录，温故而知新。学习完Java后很自然的接触到了JavaWeb。在自己想学习的过程中，仿佛有一层迷雾一般，不知道如何开始学习，懵逼了很久。经常看被人说Spring框架，xxx框架，就很好奇，想着有空把它学了，去了解才知道原来要有很多知识支撑才可以深入的去学一个框架。像Java语法基础，数据库，都要了解学习，才慢慢的去接触主流框">
+<meta name="twitter:title" content="机智">
+<meta name="twitter:description" content="Java反射机制 Java反射机制的作用  在学习的时候频繁的遇到了反射的问题,写博客有利于理清思路.所以写这篇博客来理清反射的关系,谈到反射,先给出定义.  Java反射机制定义 JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。   1.">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/07/26/euJHl6.png">
 
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/08/学习Servlet-JSP-chapter1/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/26/Java反射/">
 
 
 
 
 
-  <title>学习Servlet&JSP chapter1 | 机智</title>
+  <title> | 机智</title>
   
 
 
@@ -243,7 +244,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/08/学习Servlet-JSP-chapter1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/Java反射/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ymon">
@@ -260,7 +261,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习Servlet&JSP chapter1</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -272,8 +273,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-08T14:45:55+08:00">
-                2019-02-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-26T17:24:33+08:00">
+                2019-07-26
               </time>
             
 
@@ -304,7 +305,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  502
                 </span>
               
 
@@ -320,7 +321,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  1
                 </span>
               
             </div>
@@ -341,63 +342,31 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="这是一条自己摸索的学习过程"><a href="#这是一条自己摸索的学习过程" class="headerlink" title="这是一条自己摸索的学习过程"></a>这是一条自己摸索的学习过程</h4><p>这是刚开始记录自己的学习路程，希望能做好记录，温故而知新。<br>学习完Java后很自然的接触到了JavaWeb。在自己想学习的过程中，仿佛有一层迷雾一般，不知道如何开始学习，懵逼了很久。<br>经常看被人说Spring框架，xxx框架，就很好奇，想着有空把它学了，去了解才知道原来要有很多知识支撑才可以深入的去学一个框架。像Java语法基础，数据库，都要了解学习，才慢慢的去接触主流框架。那Web基础又有很多要学习的像Http/tcp协议、JSP、Servlet、cookie等等等，还有很多都不了解。<br><br><br></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="1-理解Web服务器和Web客户"><a href="#1-理解Web服务器和Web客户" class="headerlink" title="1. 理解Web服务器和Web客户"></a>1. 理解Web服务器和Web客户</h2><blockquote>
-<p>Web服务器接受客户请求，然后向客户返回一些结果。</p>
-<p>Web客户一般指的是浏览器应用</p>
-</blockquote>
+        <h1 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a>Java反射机制</h1><hr>
+<h2 id="Java反射机制的作用"><a href="#Java反射机制的作用" class="headerlink" title="Java反射机制的作用"></a>Java反射机制的作用</h2><p>  在学习的时候频繁的遇到了反射的问题,写博客有利于理清思路.所以写这篇博客来理清反射的关系,谈到反射,先给出定义.</p>
 <blockquote>
-<p>浏览器负责解释HTML代码，把Web页面呈现给用户</p>
+<p>Java反射机制定义 JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。 </p>
 </blockquote>
-<p><strong>他们之间的 会话 的简单表示</strong></p>
+<h2 id="1-Java反射机制的理解"><a href="#1-Java反射机制的理解" class="headerlink" title="1. Java反射机制的理解"></a>1. Java反射机制的理解</h2><h3 id="1-1-类的类型是什么？"><a href="#1-1-类的类型是什么？" class="headerlink" title="1.1 类的类型是什么？"></a>1.1 类的类型是什么？</h3><p>  在谈到反射机制之前我们得先了解一下类的构成的大概过程，便于后期的理解。由一段代码变成一个实例，为了方便后面的进行，我们分成三个阶段。第一个是源码阶段，第二个是被类加载器加载入了内存后的Class类阶段，第三阶段是实例化后的实例对象阶段。</p>
+<p></p><p align="center">图：生成过程</p><p></p>
+<div align="center"><img width="700" height="390" src="https://s2.ax1x.com/2019/07/26/euJHl6.png"></div>
+
+<p>  为什么突然讲到类的构成过程呢？<strong>是因为类是反射的基础</strong>。我们知道Class类是一切类的类，Class类是一切类的类，即类的类型。</p>
+<h3 id="1-2-如何获取类对象？"><a href="#1-2-如何获取类对象？" class="headerlink" title="1.2 如何获取类对象？"></a>1.2 如何获取类对象？</h3><p>  上面一节说到类的构成大致分成了三个阶段，获取类对象在三个阶段有分别不同的获取方法。</p>
+<ol>
+<li>在最初的字节阶段中我们通常使用Class对象的forName方法来把字节文件导入到内存中，来获取对象。<blockquote>
+<p>static Class&lt;?&gt; forName(String className)  返回与给定字符串名称的类或接口相关联的 类对象.</p>
+</blockquote>
+</li>
+<li><p>在引入内存后的第二阶段，我们使用class.getClass()来获得类对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Class cls = String.class;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在生成实例后使用对象的getClass方法。</p>
 <blockquote>
-<p>用户-(点击链接)–&gt;浏览器-(浏览器格式化请求，发给服务器)—&gt;服务器(查找所请求的页面)</p>
+<p>public final class&lt;?&gt; getClass()</p>
 </blockquote>
-<blockquote>
-<p>用户&lt;-(浏览器得到HTML，显示给用户)浏览器&lt;–(服务器对响应格式化，并发给客户)服务器</p>
-</blockquote>
-<h2 id="2-Http协议"><a href="#2-Http协议" class="headerlink" title="2. Http协议"></a>2. Http协议</h2><p>在web上，客户和服务器间必须讲Http。Http是web上客户和服务器之间进行通信的协议。</p>
-<p>过程：<br>客户—&gt;发送请求—&gt;web服务器—&gt;响应—&gt;客户.</p>
-<p><strong>http是TCP/IP的上层协议</strong></p>
-<blockquote>
-<p>TCP负责确保从一个网络节点到另一个网络节点传达的一个文件被完整的传达到目的地，尽管在具体的传输过程中会被分成小块传输。（了解还不是很深，看完网课后可能会补充。<br>IP是一个底层协议，负责把数据（数据包）按路移动到目的地。</p>
-</blockquote>
-<p><strong>HTTP会话的结构是一个简单的请求/响应序列:浏览器发出请求，服务器做出响应。</strong></p>
-<hr>
-<p>请求流的关键要素</p>
-<blockquote>
-<p>HTTP方法(要完成的动作)：<strong>GET、POST</strong>、HEAD、TRACE、PUT、DELETE、OPTIONS、CONNECT</p>
-<p>要访问的页面</p>
-<p>表单参数(如方法参数)</p>
-</blockquote>
-<p>请求:一个请求一般由请求行和请求首部以及请求体组成，不同的方法有小不同。例如GET方法就没有<strong>消息体</strong>。<br><br>请求行中包括了HTTP方法，Web服务器上的资源路径，HTTP协议版本。</p>
-<blockquote>
-<p>eg:GET /select/xxxx.jsp?color=dark&amp;name=Jack HTTP/1.1<br>?后的内容就是参数，在GET中的特点，会把参数<strong>显式</strong>的表示出来</p>
-</blockquote>
-<p>请求首部中包括了诸如端口号，服务器主机名、可以接受的资源类型等等内容，都是”名称：值”形式的一对对值。</p>
-<blockquote>
-<p>消息体内就是”值名称=值”形式的内容（不一定存在，取决于方法，GET方法就没有消息体）</p>
-</blockquote>
-<hr>
-<p>响应流的关键要素</p>
-<blockquote>
-<p>状态码(表示请求是否成功)：200 OK、404 Not Found、403 Forbidden等等</p>
-<p>内容类型</p>
-<p>内容（体）</p>
-</blockquote>
-<p>HTTP响应包括一个首部和一个体。</p>
-<blockquote>
-<p>首部包含了协议类型，请求状态，体内内容的类型等。</p>
-<p>体内包含的就是浏览器具体显示的内容。</p>
-</blockquote>
-<p>首部中有个值叫Conten-Type，它的值都为<strong>MIME</strong>类型，它负责告诉浏览器接受的数据是什么类型的。</p>
-<hr>
-<p>一个服务器上有65535个端口，有的端口已经被某些应用占用掉了，例如21,23,80等，<strong>每个应用都有自己的协议</strong>，可以理解为一间大厦里面有很多部门，每个部门的职责业务不同，如果你的申请表给错了部门，那是没办法完成解析的。</p>
-<hr>
-<h2 id="Servlet-amp-jsp到底干嘛用的？"><a href="#Servlet-amp-jsp到底干嘛用的？" class="headerlink" title="Servlet&amp;jsp到底干嘛用的？"></a>Servlet&amp;jsp到底干嘛用的？</h2><h4 id="首先我们要了解的是：Web服务器擅长的是提供静态的Web页面。"><a href="#首先我们要了解的是：Web服务器擅长的是提供静态的Web页面。" class="headerlink" title="首先我们要了解的是：Web服务器擅长的是提供静态的Web页面。"></a>首先我们要了解的是：Web服务器擅长的是提供静态的Web页面。</h4><p>可以理解Web服务器很懒，他只负责拿东西，再加一下首部，别的都懒的做。这样会导致，我们只能拿到静态的资源，这就导致我们得到的资源很不灵活，如果文件中有变量，例如时间，可以随时更新，并返回就好了。<br><br>Web服务器虽然懒，但是可以跟别的应用进行通信，他可以把接受过来的表单数据根据判断，给可以处理这份表单数据的应用，然后由这个应用来生成响应。这个辅助应用就是Servlet。</p>
-<p>我理解下来，Servlet就是一个万事通，他自己做的事情很有限，但是总是能把事情做完。它接收到了数据之后，他知道该把数据给某某人，然后某某人加工处理后，把信息返回给servlet然后生成响应，然后返回响应。</p>
-<p>实际上Servlet就是一个java应用，继承了HttpServelt的，实现了doGet()/doPost()方法的一个类。</p>
-<h4 id="通过Servlet返回HTML，非常难修改，很丑。"><a href="#通过Servlet返回HTML，非常难修改，很丑。" class="headerlink" title="通过Servlet返回HTML，非常难修改，很丑。"></a>通过Servlet返回HTML，非常难修改，很丑。</h4><p>于是我们引入了JSP，JSP就是<strong>HTML中写JAVA</strong>，通过JSP来写HTML，可以让页面设计的人员专注于负责HTML的编写，他们只需要知道如何去调用Java方法的标记就好了，在需要动态内容的地方放上JSP就行。</p>
+</li>
+</ol>
 
       
     </div>
@@ -413,14 +382,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Servlet/" rel="tag"># Servlet</a>
-          
-            <a href="/tags/Jsp/" rel="tag"># Jsp</a>
-          
-        </div>
-      
 
       
       
@@ -430,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/08/学习Markdown语法/" rel="next" title="学习Markdown语法">
-                <i class="fa fa-chevron-left"></i> 学习Markdown语法
+              <a href="/2019/07/24/java反射机制/" rel="next" title="java反射机制">
+                <i class="fa fa-chevron-left"></i> java反射机制
               </a>
             
           </div>
@@ -440,8 +401,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/16/简单了解Tomcat/" rel="prev" title="简单了解Tomcat">
-                简单了解Tomcat <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/08/深入理解JVM———chapter2/" rel="prev" title="深入理解JVM——chapter2（一）">
+                深入理解JVM——chapter2（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +528,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这是一条自己摸索的学习过程"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">这是一条自己摸索的学习过程</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-理解Web服务器和Web客户"><span class="nav-number">2.1.</span> <span class="nav-text">1. 理解Web服务器和Web客户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Http协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. Http协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet-amp-jsp到底干嘛用的？"><span class="nav-number">2.3.</span> <span class="nav-text">Servlet&amp;jsp到底干嘛用的？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先我们要了解的是：Web服务器擅长的是提供静态的Web页面。"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">首先我们要了解的是：Web服务器擅长的是提供静态的Web页面。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过Servlet返回HTML，非常难修改，很丑。"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">通过Servlet返回HTML，非常难修改，很丑。</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java反射机制"><span class="nav-number">1.</span> <span class="nav-text">Java反射机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java反射机制的作用"><span class="nav-number">1.1.</span> <span class="nav-text">Java反射机制的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Java反射机制的理解"><span class="nav-number">1.2.</span> <span class="nav-text">1. Java反射机制的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-类的类型是什么？"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1 类的类型是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-如何获取类对象？"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2 如何获取类对象？</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
