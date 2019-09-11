@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="学习MarkDown语法 1.标题书写形式两种标题的语法，分别是Setext和atx形式。 Setext是通过“=”和“-”分别对应最高阶和第二阶。 atx是通过行首“#”的个数来区分标题阶数。ps.记得空格  2.列表书写形式列表可以使用星号、加号、减号来作为列表标记。 * candy* Gum* Booze  有序的列表如下： 1. Red2. Green3. Blue  3.链接的表示方式M">
+<meta name="description" content="了解对象的创建过程 深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习Markdown语法">
-<meta property="og:url" content="http://yoursite.com/2019/02/08/学习Markdown语法/index.html">
+<meta property="og:title" content="深入理解JVM-chapter2（二）">
+<meta property="og:url" content="http://yoursite.com/2019/09/09/深入理解JVM-chapter2（二）/index.html">
 <meta property="og:site_name" content="机智">
-<meta property="og:description" content="学习MarkDown语法 1.标题书写形式两种标题的语法，分别是Setext和atx形式。 Setext是通过“=”和“-”分别对应最高阶和第二阶。 atx是通过行首“#”的个数来区分标题阶数。ps.记得空格  2.列表书写形式列表可以使用星号、加号、减号来作为列表标记。 * candy* Gum* Booze  有序的列表如下： 1. Red2. Green3. Blue  3.链接的表示方式M">
+<meta property="og:description" content="了解对象的创建过程 深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-08T06:27:53.750Z">
+<meta property="og:updated_time" content="2019-09-09T12:46:12.040Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习Markdown语法">
-<meta name="twitter:description" content="学习MarkDown语法 1.标题书写形式两种标题的语法，分别是Setext和atx形式。 Setext是通过“=”和“-”分别对应最高阶和第二阶。 atx是通过行首“#”的个数来区分标题阶数。ps.记得空格  2.列表书写形式列表可以使用星号、加号、减号来作为列表标记。 * candy* Gum* Booze  有序的列表如下： 1. Red2. Green3. Blue  3.链接的表示方式M">
+<meta name="twitter:title" content="深入理解JVM-chapter2（二）">
+<meta name="twitter:description" content="了解对象的创建过程 深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/08/学习Markdown语法/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/09/深入理解JVM-chapter2（二）/">
 
 
 
 
 
-  <title>学习Markdown语法 | 机智</title>
+  <title>深入理解JVM-chapter2（二） | 机智</title>
   
 
 
@@ -242,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/08/学习Markdown语法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/09/深入理解JVM-chapter2（二）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ymon">
@@ -259,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习Markdown语法</h1>
+          <h1 class="post-title" itemprop="name headline">深入理解JVM-chapter2（二）</h1>
         
 
         <div class="post-meta">
@@ -271,8 +271,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-08T13:52:53+08:00">
-                2019-02-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-09T20:39:55+08:00">
+                2019-09-09
               </time>
             
 
@@ -303,7 +303,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  468
+                  95
                 </span>
               
 
@@ -340,63 +340,8 @@
       
 
       
-        <h1 id="学习MarkDown语法"><a href="#学习MarkDown语法" class="headerlink" title="学习MarkDown语法"></a>学习MarkDown语法</h1><p><br></p>
-<h2 id="1-标题书写形式"><a href="#1-标题书写形式" class="headerlink" title="1.标题书写形式"></a>1.标题书写形式</h2><h4 id="两种标题的语法，分别是Setext和atx形式。"><a href="#两种标题的语法，分别是Setext和atx形式。" class="headerlink" title="两种标题的语法，分别是Setext和atx形式。"></a>两种标题的语法，分别是Setext和atx形式。</h4><ol>
-<li>Setext是通过“=”和“-”分别对应最高阶和第二阶。</li>
-<li>atx是通过行首“#”的个数来区分标题阶数。ps.记得空格</li>
-</ol>
-<h2 id="2-列表书写形式"><a href="#2-列表书写形式" class="headerlink" title="2.列表书写形式"></a>2.列表书写形式</h2><h4 id="列表可以使用星号、加号、减号来作为列表标记。"><a href="#列表可以使用星号、加号、减号来作为列表标记。" class="headerlink" title="列表可以使用星号、加号、减号来作为列表标记。"></a>列表可以使用星号、加号、减号来作为列表标记。</h4><blockquote>
-<p>* candy<br><br>* Gum<br><br>* Booze<br></p>
-</blockquote>
-<h4 id="有序的列表如下："><a href="#有序的列表如下：" class="headerlink" title="有序的列表如下："></a>有序的列表如下：</h4><blockquote>
-<p>1. Red<br><br>2. Green<br><br>3. Blue<br></p>
-</blockquote>
-<h2 id="3-链接的表示方式"><a href="#3-链接的表示方式" class="headerlink" title="3.链接的表示方式"></a>3.链接的表示方式</h2><p>Markdown支持两种形式的链接语法：行内 和 参考 两种形式。</p>
-<p>行内：</p>
-<blockquote>
-<p>this is an[example link](<a href="http://example.com/)" target="_blank" rel="noopener">http://example.com/)</a>.</p>
-<p>要注意的是分清圆括号和方括号。</p>
-</blockquote>
-<p>参考:</p>
-<blockquote>
-<p>I get 10 times more traffic from [Google][1] than from<br>[Yahoo][2] or [MSN][3].</p>
-</blockquote>
-<blockquote>
-<p>[1]: <a href="http://google.com/" target="_blank" rel="noopener">http://google.com/</a> “Google”<br><br>[2]: <a href="http://search.yahoo.com/" target="_blank" rel="noopener">http://search.yahoo.com/</a> “Yahoo Search”<br><br>[3]: <a href="http://search.msn.com/" target="_blank" rel="noopener">http://search.msn.com/</a> “MSN Search”<br></p>
-<p>同样要注意上面用的全是方括号</p>
-</blockquote>
-<h2 id="4-图片的表示方式"><a href="#4-图片的表示方式" class="headerlink" title="4.图片的表示方式"></a>4.图片的表示方式</h2><p>图片的语法和链接的基本一致，同样分为行内和参考两种形式。</p>
-<p>行内：</p>
-<blockquote>
-<p>![alt text](/path/to/img.jpg “title”)</p>
-<p>其中alt text是替代文字，当照片无法显示的时候会显示这行替代文字。<br>圆括号内前面的为src，后面为标题。</p>
-</blockquote>
-<p>参考：</p>
-<blockquote>
-<p>![alt text][id]</p>
-<p>[id]:/path/to/img.jpg “title”</p>
-</blockquote>
-<blockquote>
-<p>前后都是方括号，图片链接的话通过图床可以简单获取。</p>
-</blockquote>
-<blockquote>
-<p>title可写可以不写</p>
-</blockquote>
-<h2 id="5-代码的表示方式"><a href="#5-代码的表示方式" class="headerlink" title="5.代码的表示方式"></a>5.代码的表示方式</h2><p>使用反引号`来标记代码区段，会自动把html换成html实体。在贴html代码的时候很方便。</p>
-<blockquote>
-<p>I strongly recommend against using any `&lt;blink>` tags.</p>
-</blockquote>
-<p>更方便的方式就是在每行的行首缩进四个空格或者一个Tab，便可以获得一个格式化好的代码区块。</p>
-<h2 id="6-强调的表示方式"><a href="#6-强调的表示方式" class="headerlink" title="6.强调的表示方式"></a>6.强调的表示方式</h2><p>使用星号、底线作为标记强调字词的符号。<br><br>斜体的表示方式为：</p>
-<blockquote>
-<p>*sentence*</p>
-<p>_sentence_</p>
-</blockquote>
-<p>粗体的表示方式为：</p>
-<blockquote>
-<p>**sentence**</p>
-<p>__sentence__</p>
-</blockquote>
+        <h1 id="了解对象的创建过程"><a href="#了解对象的创建过程" class="headerlink" title="了解对象的创建过程"></a>了解对象的创建过程</h1><hr>
+<p>深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。</p>
 
       
     </div>
@@ -421,15 +366,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/09/08/深入理解JVM———chapter2/" rel="next" title="深入理解JVM——chapter2（一）">
+                <i class="fa fa-chevron-left"></i> 深入理解JVM——chapter2（一）
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/08/学习Servlet-JSP-chapter1/" rel="prev" title="学习Servlet&JSP chapter1">
-                学习Servlet&JSP chapter1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -554,7 +499,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习MarkDown语法"><span class="nav-number">1.</span> <span class="nav-text">学习MarkDown语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-标题书写形式"><span class="nav-number">1.1.</span> <span class="nav-text">1.标题书写形式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#两种标题的语法，分别是Setext和atx形式。"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">两种标题的语法，分别是Setext和atx形式。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-列表书写形式"><span class="nav-number">1.2.</span> <span class="nav-text">2.列表书写形式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表可以使用星号、加号、减号来作为列表标记。"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">列表可以使用星号、加号、减号来作为列表标记。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有序的列表如下："><span class="nav-number">1.2.0.2.</span> <span class="nav-text">有序的列表如下：</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#3-链接的表示方式"><span class="nav-number">1.3.</span> <span class="nav-text">3.链接的表示方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-图片的表示方式"><span class="nav-number">1.4.</span> <span class="nav-text">4.图片的表示方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-代码的表示方式"><span class="nav-number">1.5.</span> <span class="nav-text">5.代码的表示方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-强调的表示方式"><span class="nav-number">1.6.</span> <span class="nav-text">6.强调的表示方式</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#了解对象的创建过程"><span class="nav-number">1.</span> <span class="nav-text">了解对象的创建过程</span></a></li></ol></div>
             
 
           </div>
