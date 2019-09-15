@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="了解对象的创建过程 深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。">
+<meta name="description" content="了解对象的创建过程深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。 1. 类加载检查所谓类加载检查，当虚拟机遇到一条new指令的时候，要去查看常量池内是否存在这样一个类的符号引用。并检查这个类是否被加载、解析、初始化过。如果没有就得先加载进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解JVM-chapter2（二）">
 <meta property="og:url" content="http://yoursite.com/2019/09/09/深入理解JVM-chapter2（二）/index.html">
 <meta property="og:site_name" content="机智">
-<meta property="og:description" content="了解对象的创建过程 深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。">
+<meta property="og:description" content="了解对象的创建过程深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。 1. 类加载检查所谓类加载检查，当虚拟机遇到一条new指令的时候，要去查看常量池内是否存在这样一个类的符号引用。并检查这个类是否被加载、解析、初始化过。如果没有就得先加载进">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-09T12:46:12.040Z">
+<meta property="og:updated_time" content="2019-09-15T01:43:20.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JVM-chapter2（二）">
-<meta name="twitter:description" content="了解对象的创建过程 深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。">
+<meta name="twitter:description" content="了解对象的创建过程深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。 1. 类加载检查所谓类加载检查，当虚拟机遇到一条new指令的时候，要去查看常量池内是否存在这样一个类的符号引用。并检查这个类是否被加载、解析、初始化过。如果没有就得先加载进">
 
 
 
@@ -303,7 +303,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  95
+                  881
                 </span>
               
 
@@ -319,7 +319,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -340,8 +340,12 @@
       
 
       
-        <h1 id="了解对象的创建过程"><a href="#了解对象的创建过程" class="headerlink" title="了解对象的创建过程"></a>了解对象的创建过程</h1><hr>
-<p>深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。</p>
+        <h1 id="了解对象的创建过程"><a href="#了解对象的创建过程" class="headerlink" title="了解对象的创建过程"></a>了解对象的创建过程</h1><p>深入理解JVM的第二章主要是讲解自动内存管理机制，在内存的管理中，必定会涉及对象的创建，简单的new创建背后，是JVM的默默付出。JVM的付出不该躲在幕后，让我们了解JVM的面目，了解它帮我们创建对象的过程。</p>
+<h2 id="1-类加载检查"><a href="#1-类加载检查" class="headerlink" title="1. 类加载检查"></a>1. 类加载检查</h2><p>所谓类加载检查，当虚拟机遇到一条new指令的时候，要去查看常量池内是否存在这样一个类的符号引用。并检查这个类是否被加载、解析、初始化过。如果没有就得先加载进来，具体的类加载，初始化等流程会在后面再提及。</p>
+<h2 id="2-分配内存"><a href="#2-分配内存" class="headerlink" title="2. 分配内存"></a>2. 分配内存</h2><p>先给出一个类的小秘密，对象所需的内存大小在类加载完后便完全确定了。后面接着讲分配内存。分配内存有两种方式，一种是指针碰撞，一种是空闲列表。<br>先解释指针碰撞，假设JAVA堆的内存是规整的分配的，即被分配出的在一块，空闲的在另一块，使用一个指针指向已分配出和空闲的边界，当我们需要分配内存的时候，就移动这个指针，腾出相应大小。这便是指针碰撞。但是指针碰撞有缺陷，就是他有成立的前提，需要将已分配的内存压缩好，因为一旦分配出的空间被回收，那内存的分配就不是规整的，需要进行压缩。Java堆是否规整取决与GC收集器是否带有压缩整理功能。<br>第二种分配内存的方式叫空闲列表，空闲列表的做法是，记录下没有使用的内存块的位置和大小，在分配的时候找到一个足够大的划分给对象即可。</p>
+<h2 id="3-分配初值"><a href="#3-分配初值" class="headerlink" title="3. 分配初值"></a>3. 分配初值</h2><p>内存分配完后虚拟机需要将分配到的内存空间初始化为0值（不包括对象头，对象头内容在后面会提及）。这一步保证对象不赋初始值也可以直接使用。接下来虚拟机会对对象进行必要的设置，如记录类的元数据信息、对象的哈希码、对象的GC分代年龄等等。这些信息都放在对象头中保存。对象头包括了两部分的信息，一部分是自身运行时的数据，如哈希码、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID等等。对象的另外一部分是类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针确定这个对象是那个类的实例。特殊的是，如果对象是一个Java数组，那么还需要储存一个记录长度的字段，因为虚拟机可以通过普通Java对象的元数据信息确定Java对象的大小，却没办法确定数组的大小。</p>
+<hr>
+<p>经过上面那段过程中，对于虚拟机来说一个新的对象已经产生了，但是JAVA程序的视角来说还没有，因为还没有给对象进行<init>方法，所有的字段都还为0。当执行完<init>,对象按照程序员的意愿进行了初始化后，一个真正意义上的对象才算完全产生出来</init></init></p>
 
       
     </div>
@@ -366,7 +370,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/08/深入理解JVM———chapter2/" rel="next" title="深入理解JVM——chapter2（一）">
+              <a href="/2019/09/08/深入理解JVM-chapter2（一）/" rel="next" title="深入理解JVM——chapter2（一）">
                 <i class="fa fa-chevron-left"></i> 深入理解JVM——chapter2（一）
               </a>
             
@@ -499,7 +503,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#了解对象的创建过程"><span class="nav-number">1.</span> <span class="nav-text">了解对象的创建过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#了解对象的创建过程"><span class="nav-number">1.</span> <span class="nav-text">了解对象的创建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-类加载检查"><span class="nav-number">1.1.</span> <span class="nav-text">1. 类加载检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-分配内存"><span class="nav-number">1.2.</span> <span class="nav-text">2. 分配内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-分配初值"><span class="nav-number">1.3.</span> <span class="nav-text">3. 分配初值</span></a></li></ol></li></ol></div>
             
 
           </div>
