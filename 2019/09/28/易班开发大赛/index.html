@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JSP,Servlet,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="了解Servlet的一生 用户点击一个URL，指向一个Servlet，容器接收到信息。 容器创建请求对象、响应对象 容器寻找特定的Servlet，并加载类 容器调用Servlet构造函数，并分配线程。 调用Init()函数，初始化servlet。 调用service方法，并传递请求、响应对象。 根据Http方法头选择方法，doGet()/doPost()。 调用destroy()，回收servle">
-<meta name="keywords" content="JSP,Servlet">
+<meta name="description" content="首次项目经验今天是第四周的周六,睡到了十点才醒，醒来不久就看到了易班开发大赛的审核结果出来了，初赛没过。一开始看到的时候满惊讶的，紧跟着来的就是难过和一点迷茫。难过是因为觉得自己的努力白费了，花了那么多心思去coding，客户端有小程序呈现，管理端有WEB后台，说实话做的时候我是挺满意的，觉得这样能把我们送进决赛了，但事与愿违。比起难过，迷茫更让人恐惧。从高中到大学，最大的不同就是方向不那么明确了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习Servlet&amp;JSP chapter3">
-<meta property="og:url" content="http://yoursite.com/2019/02/16/学习Servlet-JSP-chapter3/index.html">
+<meta property="og:title" content="易班开发大赛">
+<meta property="og:url" content="http://yoursite.com/2019/09/28/易班开发大赛/index.html">
 <meta property="og:site_name" content="机智">
-<meta property="og:description" content="了解Servlet的一生 用户点击一个URL，指向一个Servlet，容器接收到信息。 容器创建请求对象、响应对象 容器寻找特定的Servlet，并加载类 容器调用Servlet构造函数，并分配线程。 调用Init()函数，初始化servlet。 调用service方法，并传递请求、响应对象。 根据Http方法头选择方法，doGet()/doPost()。 调用destroy()，回收servle">
+<meta property="og:description" content="首次项目经验今天是第四周的周六,睡到了十点才醒，醒来不久就看到了易班开发大赛的审核结果出来了，初赛没过。一开始看到的时候满惊讶的，紧跟着来的就是难过和一点迷茫。难过是因为觉得自己的努力白费了，花了那么多心思去coding，客户端有小程序呈现，管理端有WEB后台，说实话做的时候我是挺满意的，觉得这样能把我们送进决赛了，但事与愿违。比起难过，迷茫更让人恐惧。从高中到大学，最大的不同就是方向不那么明确了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/iFT6Iwg.png">
-<meta property="og:updated_time" content="2019-02-16T14:09:41.977Z">
+<meta property="og:updated_time" content="2019-09-28T05:18:22.011Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习Servlet&amp;JSP chapter3">
-<meta name="twitter:description" content="了解Servlet的一生 用户点击一个URL，指向一个Servlet，容器接收到信息。 容器创建请求对象、响应对象 容器寻找特定的Servlet，并加载类 容器调用Servlet构造函数，并分配线程。 调用Init()函数，初始化servlet。 调用service方法，并传递请求、响应对象。 根据Http方法头选择方法，doGet()/doPost()。 调用destroy()，回收servle">
-<meta name="twitter:image" content="https://i.imgur.com/iFT6Iwg.png">
+<meta name="twitter:title" content="易班开发大赛">
+<meta name="twitter:description" content="首次项目经验今天是第四周的周六,睡到了十点才醒，醒来不久就看到了易班开发大赛的审核结果出来了，初赛没过。一开始看到的时候满惊讶的，紧跟着来的就是难过和一点迷茫。难过是因为觉得自己的努力白费了，花了那么多心思去coding，客户端有小程序呈现，管理端有WEB后台，说实话做的时候我是挺满意的，觉得这样能把我们送进决赛了，但事与愿违。比起难过，迷茫更让人恐惧。从高中到大学，最大的不同就是方向不那么明确了">
 
 
 
@@ -122,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/16/学习Servlet-JSP-chapter3/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/28/易班开发大赛/">
 
 
 
 
 
-  <title>学习Servlet&JSP chapter3 | 机智</title>
+  <title>易班开发大赛 | 机智</title>
   
 
 
@@ -245,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/学习Servlet-JSP-chapter3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/28/易班开发大赛/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ymon">
@@ -262,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习Servlet&JSP chapter3</h1>
+          <h1 class="post-title" itemprop="name headline">易班开发大赛</h1>
         
 
         <div class="post-meta">
@@ -274,8 +271,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T21:24:21+08:00">
-                2019-02-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-28T13:17:00+08:00">
+                2019-09-28
               </time>
             
 
@@ -306,7 +303,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  442
+                  1.2k
                 </span>
               
 
@@ -322,7 +319,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -343,54 +340,8 @@
       
 
       
-        <h2 id="了解Servlet的一生"><a href="#了解Servlet的一生" class="headerlink" title="了解Servlet的一生"></a>了解Servlet的一生</h2><ol>
-<li>用户点击一个URL，指向一个Servlet，容器接收到信息。</li>
-<li>容器创建请求对象、响应对象</li>
-<li>容器寻找特定的Servlet，并加载类</li>
-<li>容器调用Servlet构造函数，并分配线程。</li>
-<li>调用Init()函数，初始化servlet。</li>
-<li>调用service方法，并传递请求、响应对象。</li>
-<li>根据Http方法头选择方法，doGet()/doPost()。</li>
-<li>调用destroy()，回收servlet示例。<div align="center">
+        <h3 id="首次项目经验"><a href="#首次项目经验" class="headerlink" title="首次项目经验"></a>首次项目经验</h3><p>今天是第四周的周六,睡到了十点才醒，醒来不久就看到了易班开发大赛的审核结果出来了，初赛没过。一开始看到的时候满惊讶的，紧跟着来的就是难过和一点迷茫。难过是因为觉得自己的努力白费了，花了那么多心思去coding，客户端有小程序呈现，管理端有WEB后台，说实话做的时候我是挺满意的，觉得这样能把我们送进决赛了，但事与愿违。比起难过，迷茫更让人恐惧。<br>从高中到大学，最大的不同就是方向不那么明确了，很多人直到毕业都没搞明白自己的方向，跟随着老师亦步亦趋，照葫芦画瓢，上课、复习、考试、放假，这便是很多学生的大学生活。因为没有方向，所以误以为专业课，老师的作业要求，考试安排便是大学的所有，高考前可以这样做，因为你的家长、老师已经在用一套成熟的培养计划把你送到你需要达成的目标前，他们在帮你规划，帮你调整，那时你还小。<br>因为一些原因，在大二的时候才慢慢的意识到有自己的规划、目标是前所未有的重要。于是开始给自己制定计划，给自己安排任务，设定时间表，开始接触项目。随着自己的规划实践，知识面在拓宽，编程能力在提升，专业课的绩点也在提升，一切好像来的太容易，容易给自己一种“我已经很努力了”的自我安慰。所以得知没过的时候，才会觉得迷茫吧。<br>其实在写的时候心情已经平复很多了，比赛的失败反而是敲响了警钟，提醒自己态度要端正回来，在学习技术的路上本就不该是一帆风顺，趁着这次失败的经验抓紧总结错误，不然后面进行的过程还会失误。<br>项目没过后去了解了原因，是后台挂了，老师登不进去所以给了不过。一开始我是满不开心的，因为WEB端后台不是我在跟进，虽然后台管理的页面比较简单，但是进度比较慢我也是知道的。当时有种事不关己高高挂起的感觉，凭着自己不会前端的由头就没有去了解。深刻的感觉到“雪崩来临的时候，没有一片雪花是无辜的。”的精髓，其实如果当时候主动去了解一下框架，帮忙把后台界面写出来的话，进决赛我觉得应该没问题的。太惨了，但是我都觉得是自己活该。<br>整个项目的流程，业务功能设计，数据库设计，接口设计和前后端的交流都存在很多问题。像业务功能设计，我们开的会不够，以至于有时候开发的时候会和另外一个队友再去沟通商定，导致时间的浪费，有时候还得重写实现。还有数据库设计，我们设计数据库前没有进行model层的构思，直接就去设计字段了，以至于后面的字段冗余，甚至是缺少字段的，这也在开发的过程中照成了浪费。接口设计我们没有进行，我们一开始的时候没有针对业务功能去设计一整个接口的框架，以至于我们是针对于开发到的功能再去实现，再给前端接口。前后端交流不够，WEB端的界面的失败就在这里发生，后台不仅要关注好后台的搭建，前端的业务也该了解，从而能让项目链接更加紧密，更不用说发生这次这样的低级错误。<br>这次项目是我第一次进行正式的开发，虽然结果不如意，但是这是从0到1 的进程，要肯定自己努力，但是也得找到自己的不足、缺点。从一开始的设计到后面的编程，第一次感受到了开发的乐趣，从一串串代码到了一个可以运行的小程序，说实话还是很有成就感的。也许这会是我大学里面的一个遗憾，因为毕竟是第一个项目。<br>技术嘛，一帆风顺学习的东西就不多了，偶尔碰碰壁端正一下心态挺好的（疯狂自我安慰）。感谢王碧云、李蕴玲、张业兴同学辣~<br>JVM第三章的学习笔记和ArrayList、LinkedList会在今晚和明晚前更新的..（也许吧。<br>加油~</p>
 
-</div></li>
-</ol>
-<p><img src="https://i.imgur.com/iFT6Iwg.png" alt=""></p>
-<p></p>
-<h2 id="了解请求和响应"><a href="#了解请求和响应" class="headerlink" title="了解请求和响应"></a>了解请求和响应</h2><ol>
-<li><p>了解请求</p>
-<ol>
-<li>每一个请求都在单独的一个线程中运行。</li>
-<li>对于每一个请求都会生成其独有请求、响应对象。</li>
-<li>默认使用Get方法</li>
-<li>HttpServletRequest对象由容器实现并提供。<h3 id="Get-和Post-方法的区别"><a href="#Get-和Post-方法的区别" class="headerlink" title="Get()和Post()方法的区别"></a>Get()和Post()方法的区别</h3><ol>
-<li>Get()请求是幂等的。</li>
-<li>Get()请求是可以建立书签的。</li>
-<li>Post()请求用于发送数据并作处理，而Get只是获取。</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>了解响应</p>
-<ol>
-<li>setContentType()和getWriter()比较常用</li>
-<li>使用JSP来完成I/O</li>
-<li>返回的必须要是MIME类型文件。</li>
-<li>分清字节和字符输出。</li>
-<li>通过setHeader(),addHeader()等调整相应首部，如发送错误，增加cookie等。</li>
-</ol>
-</li>
-</ol>
-<h3 id="重定向和请求分派的区别"><a href="#重定向和请求分派的区别" class="headerlink" title="重定向和请求分派的区别"></a>重定向和请求分派的区别</h3><pre><code>1. 重定向是通过sendRedirect(aString)来实现，把新请求发给新的URL。
-2. 重定向是用户可见的，会改变浏览器地址栏的URL。
-3. 重定向是客户来完成工作的。
-4. 若响应已提交，则无法使用重定向。
-5. 请求分派是通过各司其职来完成工作的，如调用JSP。
-6. 请求分派用户不可见。
-7. 请求分派是服务端完成工作。
-
-重定向是告诉浏览器访问另外一个URL，而请求分派只是把请求传递给了服务器上的另一个组件。
-</code></pre>
       
     </div>
     
@@ -405,14 +356,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/JSP/" rel="tag"># JSP</a>
-          
-            <a href="/tags/Servlet/" rel="tag"># Servlet</a>
-          
-        </div>
-      
 
       
       
@@ -422,8 +365,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/16/学习Servlet-JSP-chapter2/" rel="next" title="学习Servlet&JSP chapter2">
-                <i class="fa fa-chevron-left"></i> 学习Servlet&JSP chapter2
+              <a href="/2019/09/24/ArrayList译文/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -431,10 +374,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/17/Mybatis学习笔记-一/" rel="prev" title="Mybatis学习笔记(一)">
-                Mybatis学习笔记(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +498,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#了解Servlet的一生"><span class="nav-number">1.</span> <span class="nav-text">了解Servlet的一生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解请求和响应"><span class="nav-number">2.</span> <span class="nav-text">了解请求和响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-和Post-方法的区别"><span class="nav-number">2.1.</span> <span class="nav-text">Get()和Post()方法的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向和请求分派的区别"><span class="nav-number">2.2.</span> <span class="nav-text">重定向和请求分派的区别</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#首次项目经验"><span class="nav-number">1.</span> <span class="nav-text">首次项目经验</span></a></li></ol></div>
             
 
           </div>
