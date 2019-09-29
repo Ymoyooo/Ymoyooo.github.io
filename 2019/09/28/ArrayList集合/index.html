@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ArrayList专题看了很多大厂，对基础的源码掌握是有一定的要求的。特别是集合啦，在阅读了Java技术驿站的死磕集合系列类的博客后，想要自己记录一下内容，加深自己对集合的理解，掌握。文章会针对集合的增删查改的性能进行源码分析，会讲到是否线程安全，如何扩容，构建，是否支持求并集差集等等的内容。http://cmsblogs.com/?p=4781 文章中会比较多的源码,基本上都有翻译注释的. 首先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayList集合">
+<meta property="og:url" content="http://yoursite.com/2019/09/28/ArrayList集合/index.html">
+<meta property="og:site_name" content="机智">
+<meta property="og:description" content="ArrayList专题看了很多大厂，对基础的源码掌握是有一定的要求的。特别是集合啦，在阅读了Java技术驿站的死磕集合系列类的博客后，想要自己记录一下内容，加深自己对集合的理解，掌握。文章会针对集合的增删查改的性能进行源码分析，会讲到是否线程安全，如何扩容，构建，是否支持求并集差集等等的内容。http://cmsblogs.com/?p=4781 文章中会比较多的源码,基本上都有翻译注释的. 首先">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/28/u1TjG8.png">
+<meta property="og:updated_time" content="2019-09-29T11:10:28.949Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ArrayList集合">
+<meta name="twitter:description" content="ArrayList专题看了很多大厂，对基础的源码掌握是有一定的要求的。特别是集合啦，在阅读了Java技术驿站的死磕集合系列类的博客后，想要自己记录一下内容，加深自己对集合的理解，掌握。文章会针对集合的增删查改的性能进行源码分析，会讲到是否线程安全，如何扩容，构建，是否支持求并集差集等等的内容。http://cmsblogs.com/?p=4781 文章中会比较多的源码,基本上都有翻译注释的. 首先">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/09/28/u1TjG8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/28/ArrayList集合/">
+
+
+
+
+
+  <title>ArrayList集合 | 机智</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">机智</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/28/ArrayList集合/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ymon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="机智">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ArrayList集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-28T21:33:11+08:00">
+                2019-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ArrayList专题"><a href="#ArrayList专题" class="headerlink" title="ArrayList专题"></a>ArrayList专题</h2><p>看了很多大厂，对基础的源码掌握是有一定的要求的。特别是集合啦，在阅读了Java技术驿站的死磕集合系列类的博客后，想要自己记录一下内容，加深自己对集合的理解，掌握。文章会针对集合的增删查改的性能进行源码分析，会讲到是否线程安全，如何扩容，构建，是否支持求并集差集等等的内容。<a href="http://cmsblogs.com/?p=4781" title="Java技术一站-集合篇" target="_blank" rel="noopener">http://cmsblogs.com/?p=4781</a></p>
+<p>文章中会比较多的源码,基本上都有翻译注释的.</p>
+<p>首先我们列一下ArrayList我们需要掌握的知识点：增删改查的性能问题，是否线程安全，是否支持随机访问，如何实现序列化，反序列化的。</p>
+<h3 id="ArrayList的继承体系"><a href="#ArrayList的继承体系" class="headerlink" title="ArrayList的继承体系"></a>ArrayList的继承体系</h3><p> </p><p align="center">图[1]：<strong>ArrayList继承体系，图片引自Java技术驿站</strong></p><br> <div align="center"><img width="900" height="600" src="https://s2.ax1x.com/2019/09/28/u1TjG8.png" alt="u1TjG8.png"></div><p></p>
+<p>ArrayList继承了RandomAccess，支持快速随机访问。支持随机访问带来什么作用呢，答案是list集合实现了RandomAccess的话使用for方法查找元素会比使用Iterator快很多。</p>
+<p>ArrayList实现了Serializable，支持序列化和反序列化。</p>
+<p>ArrayList实现了Cloneable，支持使用克隆，记得显式的实现clone方法哦。</p>
+<p>ArrayList继承了了AbstractCollection。</p>
+<p>ArrayList实现了List接口，有常用的增删查改元素和求元素下标等基本的操作。</p>
+<h3 id="ArrayList的构建"><a href="#ArrayList的构建" class="headerlink" title="ArrayList的构建"></a>ArrayList的构建</h3><p>先从ArrayList的构建讲起，了解一下ArrayList的构建的过程。ArrayList的构建分为两种一种是new ArrayList(),一种是new ArrayList(0)。<br>我们来引入一下源码.</p>
+<pre><code>private static final long serialVersionUID = 8683452581122892189L;
+
+//默认的初始化容量
+private static final int DEFAULT_CAPACITY = 10;
+
+//当初始化容量为0的时候,就创建空的对象数组,也就是使用new ArrayList(0)创建的数组
+private static final Object[] EMPTY_ELEMENTDATA = {};
+
+//当使用new Array()的时候就是使用这个创建的空数组,与EMPTY_ELEMENTDATA的区别就是
+//这个数组添加第一个元素后初始化容量是10
+private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+
+/**
+ * 这个数组就是储存元素的对象数组.
+ * 如果是通过new ArrayList()创建的话,添加第一个元素时数组就会自动扩展成默认容量大小.
+ * 默认容量是10 
+ */
+transient Object[] elementData; // non-private to simplify nested class access
+
+//集合中元素的个数.
+
+private int size;
+
+/**
+ * Constructs an empty list with an initial capacity of ten.
+ * 创建一个默认长度(10)的空数组
+ */
+public ArrayList() {
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}
+</code></pre><p>从上面的源码片段,大家能很直观的看到,当使用new ArrayList()的时候,默认是使用DEFAULTCAPACITY_EMPTY_ELEMENTADA来当作对象数组的,其容量默认为10.而使用new ArrayList(0)的时候创建是使用EMPTY_ELEMENTDATA来作为对象数组.而真正存放元素的地方是elementData,一开始创建的数组数据都会在后面复制过去的.</p>
+<p>ArrayList的构建支持自定义大小.下面是源码</p>
+<pre><code> * 构建一个指定长度的空数组.
+ * 
+ * initialCapacity代表的是列表指定的初始化容量
+ * 
+ * @throws IllegalArgumentException if the specified initial capacity is negative
+ * 当传入的值为负值的时候就会报错,并把错误数字传出
+ * 
+ */
+public ArrayList(int initialCapacity) {
+    if (initialCapacity &gt; 0) {
+        this.elementData = new Object[initialCapacity];
+    } else if (initialCapacity == 0) {
+        this.elementData = EMPTY_ELEMENTDATA;
+    } else {
+        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+
+                                           initialCapacity);
+    }
+}
+</code></pre><p>从源码中看到,自定义容量会根据传入的容量大小,如果容量大于0就根据容量来创建对应的对象数组,小于0就抛出异常.</p>
+<p>除此之外,还支持从把集合的元素导入到数组内</p>
+<pre><code> * Constructs a list containing the elements of the specified
+ * collection, in the order they are returned by the collection&apos;s
+ * iterator.
+ * 按照特定集合迭代器返回的顺序,去构建一个对应长度的数组
+ *
+ * @param c the collection whose elements are to be placed into this list
+ * c代表的就是准备转换成list的集合
+ * 
+ * @throws NullPointerException if the specified collection is null
+ * 如果集合为null就会抛出错误NullPointerException
+ */
+public ArrayList(Collection&lt;? extends E&gt; c) {
+    elementData = c.toArray();
+    if ((size = elementData.length) != 0) {
+        // c.toArray might (incorrectly) not return Object[] (see 6260652)
+        if (elementData.getClass() != Object[].class)
+            elementData = Arrays.copyOf(elementData, size, Object[].class);
+    } else {
+        // replace with empty array.
+        this.elementData = EMPTY_ELEMENTDATA;
+    }
+}
+</code></pre><h4 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h4><p>最简单的把元素添加到尾部.复杂度是<strong>O(1)</strong>.</p>
+<pre><code> * Appends the specified element to the end of this list.
+ * 添加一个元素到数组的最后面
+ * @param e element to be appended to this list
+ * 当添加的时候会检测是否需要扩容
+ * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by {@link Collection#add})
+ */
+public boolean add(E e) {
+    ensureCapacityInternal(size + 1);  // 检查是否需要扩容,先不用理,看到后面会解释~
+    elementData[size++] = e;    //把元素放在尾巴,然后size自增1
+    return true;
+}
+</code></pre><p>复杂一点,把元素插入到指定位置,因为设计到移动数据,所以复杂度高很多.复杂度是<strong>O(n)</strong></p>
+<pre><code> * Inserts the specified element at the specified position in this
+ * list. Shifts the element currently at that position (if any) and
+ * any subsequent elements to the right (adds one to their indices).
+ * 把原有指定位置与其后面的全部数据都往后移一个位置，把数据插入到该指定位置。
+ * 会检查指定的位置是否合法
+ * @param index index at which the specified element is to be inserted
+ * @param element element to be inserted
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public void add(int index, E element) {
+    rangeCheckForAdd(index);//检查坐标位置是否合法
+
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+
+    //这个方法可以把elementDate的[index,index+size-index]
+    //复制到elementDate的[index+1,size+1]位置
+
+    System.arraycopy(elementData, index, elementData, index + 1,
+                     size - index);
+    elementData[index] = element;
+    size++;
+}
+</code></pre><h4 id="更改元素"><a href="#更改元素" class="headerlink" title="更改元素"></a>更改元素</h4><p>修改元素我们需要传入下标,时间复杂度是<strong>O(1)</strong></p>
+<pre><code> * Replaces the element at the specified position in this list with
+ * the specified element.
+ * 把一个指定的值替换到list里面一个指定的位置中
+ *
+ * @param index index of the element to replace
+ * 会检查index是否越界
+ * @param element element to be stored at the specified position
+ * 会返回被替换的值
+ * @return the element previously at the specified position
+ * 
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public E set(int index, E element) {
+    rangeCheck(index);//检查下表是否合法
+
+    E oldValue = elementData(index);
+    elementData[index] = element;
+    return oldValue;//返回元素被修改前的值
+}
+</code></pre><h4 id="查询元素"><a href="#查询元素" class="headerlink" title="查询元素"></a>查询元素</h4><p>查询的时间复杂度是<strong>O(n)</strong></p>
+<pre><code>/**
+ * 检查list里面是否存在o元素，存在就返回true,否则返回false
+ * @param o element whose presence in this list is to be tested
+ * @return &lt;tt&gt;true&lt;/tt&gt; if this list contains the specified element
+ */
+public boolean contains(Object o) {
+    return indexOf(o) &gt;= 0;
+}
+
+/**
+ * 将从list的头个元素开始查找，当查找到匹配元素时，将返回他的下标。
+ * 如果直到最后都没有匹配成功，将返回-1
+ */
+public int indexOf(Object o) {
+    if (o == null) {
+        for (int i = 0; i &lt; size; i++)
+            if (elementData[i]==null)
+                return i;
+    } else {
+        for (int i = 0; i &lt; size; i++)
+            if (o.equals(elementData[i]))
+                return i;
+    }
+    return -1;
+}
+</code></pre><h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>删除元素的方式有点多,有的是按下标来删除元素,有的按照元素的值去查询元素再删除.</p>
+<pre><code>/**
+ * 删除掉指定位置的元素，并把后面的元素往前挪一位。
+ * 返回被删除的元素
+ */
+public E remove(int index) {
+    rangeCheck(index);
+
+    modCount++;
+    E oldValue = elementData(index);
+
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+
+    return oldValue;
+}
+</code></pre><p>上面这种方法的复杂度是<strong>O(n)</strong>,删除后会返回原来的元素.</p>
+<p>下面的方法就是传入一个要删除值的内容,支持删除null的值.删除后的元素会返回<br>    /**</p>
+<pre><code> * 删除掉元素内首个与传入参数匹配相等的值。
+ * 元素存在并删除了会返回true，失败将返回true。
+ */
+public boolean remove(Object o) {
+    if (o == null) {
+        for (int index = 0; index &lt; size; index++)
+            if (elementData[index] == null) {
+                fastRemove(index);
+                return true;
+            }
+    } else {
+        for (int index = 0; index &lt; size; index++)
+            if (o.equals(elementData[index])) {
+                fastRemove(index);
+                return true;
+            }
+    }
+    return false;
+}
+</code></pre><p>下面的方法是为支持快速删除,因为涉及到了移动数据,所以复杂度较高,为<strong>O(n)</strong></p>
+<pre><code>/*
+ * 快速删除将不会检查下标是否越界，而且不会返回被删除的值。
+ */
+private void fastRemove(int index) {
+    modCount++;
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // 方便GC干活.
+}
+</code></pre><p>下面的方法是清空list,并为了方便GC收集把对象的值赋为null,从而把引用链条砍断了.</p>
+<pre><code>/**
+ * 给list中的全部元素附上null值
+ */
+public void clear() {
+    modCount++;
+
+    // clear to let GC do its work
+    for (int i = 0; i &lt; size; i++)
+        elementData[i] = null;
+
+    size = 0;
+}
+</code></pre><h3 id="求交集、差集"><a href="#求交集、差集" class="headerlink" title="求交集、差集"></a>求交集、差集</h3><p>这个内容我们先来看一个方法，因为求并集、差集都是依靠的一个方法，只是修改了一个参数而已。下面大家只需要阅读一次便知道这个方法的具体功能了。</p>
+<pre><code>/*
+ * 如果传入false,返回的是差集.
+ * 如果传入true,返回的是交集.
+ */
+private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
+
+    //先复制元素的数据,方便修改.
+    final Object[] elementData = this.elementData;
+
+    //把读写浮标的位置都归到0点.
+    int r = 0, w = 0;
+
+    //标志是否存在修改的情况.
+    boolean modified = false;
+
+    //按照传入参数complement从集合中筛选数据,并修改读写游标位置
+    //如果为complement的值为true,遍历完后elementDate内存放的值就是交集的值.
+    //反之就是差集的值
+    try {
+        for (; r &lt; size; r++)
+            if (c.contains(elementData[r]) == complement)
+                elementData[w++] = elementData[r];
+    } 
+
+    finally {
+        // Preserve behavioral compatibility with AbstractCollection,
+        // even if c.contains() throws.
+        if (r != size) {
+            System.arraycopy(elementData, r,
+                             elementData, w,
+                             size - r);
+            w += size - r;
+        }
+
+        //求出来的集合如果是比之前的集合要小的,把多余的数据删掉.
+        if (w != size) {
+            // clear to let GC do its work
+            for (int i = w; i &lt; size; i++)
+                elementData[i] = null;
+
+            modCount += size - w;//修改modCount为修改次数
+
+            size = w;//修改新的长度为w
+
+            modified = true; //把修改的情况记录下来.
+        }
+    }
+    //返回是否修改过的结果
+    return modified;
+}
+</code></pre><h4 id="求交集"><a href="#求交集" class="headerlink" title="求交集"></a>求交集</h4><pre><code>/**
+ * 这个方法是求list与传入参数的交集，保留一起拥有的值。
+ * 通过覆盖以及最后的赋null值实现删除的效果
+ * 传入集合会检查是否是null 如果是null会抛出一个空指针异常。
+ */
+public boolean retainAll(Collection&lt;?&gt; c) {
+    Objects.requireNonNull(c);
+    return batchRemove(c, true);
+}
+</code></pre><p>时间复杂度是<strong>O(n)</strong></p>
+<h4 id="求差集"><a href="#求差集" class="headerlink" title="求差集"></a>求差集</h4><pre><code>/**
+ * 这个方法就是求差集，在list中查找传入集合内的元素，如果找到相同的就会删除掉。
+ * 通过覆盖以及最后的赋null值实现删除的效果
+ * 传入集合会检查是否是null 如果是null会抛出一个空指针异常。
+ */
+public boolean removeAll(Collection&lt;?&gt; c) {
+    Objects.requireNonNull(c);
+    return batchRemove(c, false);
+}
+</code></pre><p>时间复杂度是<strong>O(n)</strong></p>
+<h4 id="求并集"><a href="#求并集" class="headerlink" title="求并集"></a>求并集</h4><p>求并集提供了两种办法,一个可以指定位置插入,一个默认是最后的位置插入.<br>时间复杂度是<strong>O(n)</strong><br>    /**</p>
+<pre><code> * 会把集合中的元素按照Iterator迭代的顺序，添加进去list里面。
+ * 添加前会对list的size进行一次扩容。
+ */
+public boolean addAll(Collection&lt;? extends E&gt; c) {
+    Object[] a = c.toArray();
+    int numNew = a.length;
+    ensureCapacityInternal(size + numNew);  // Increments modCount
+    System.arraycopy(a, 0, elementData, size, numNew);
+    size += numNew;
+    return numNew != 0;
+}
+
+/**
+ * 把传入的集合参入到制定的位置，把指定位置及指定位置后面的元素一同往后挪出一个
+ * 足以容纳下存入集合大小的长度。存入的集合的顺序会按照其迭代器迭代的顺序摆放。
+ */
+public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
+    rangeCheckForAdd(index);
+
+    Object[] a = c.toArray();
+    int numNew = a.length;
+    ensureCapacityInternal(size + numNew);  // Increments modCount
+
+    int numMoved = size - index;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index, elementData, index + numNew,
+                         numMoved);
+
+    System.arraycopy(a, 0, elementData, index, numNew);
+    size += numNew;
+    return numNew != 0;
+}
+</code></pre><h3 id="ArrayList扩容"><a href="#ArrayList扩容" class="headerlink" title="ArrayList扩容"></a>ArrayList扩容</h3><p>我们知道ArrayList是可以动态扩大的,所以它也有个别名叫做动态数组.下面来了解一下它是怎么扩大的.<br>看完源码你会发现数组在判定合法的时候会变大0.5倍,如果扩大后的容量超过了最大的限制,INTEGER.MAX_SIZE-8,的话就会直接扩容到MAX_SIZE大小并返回.</p>
+<pre><code>/**
+ * 传入一个目标容量值.
+ * 如果数组是通过new ArrayList(0)创建的话,传入参数&lt;10按10来扩容,传入参数&gt;10就按参数大小来扩容.
+ * 如果数组是通过new ArrayList()创建,按传入参数来扩容.
+ */
+public void ensureCapacity(int minCapacity) {
+    int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
+        // any size if not default element table
+        ? 0
+        // larger than default for default empty table. It&apos;s already
+        // supposed to be at default size.
+        : DEFAULT_CAPACITY;
+
+    if (minCapacity &gt; minExpand) {
+        ensureExplicitCapacity(minCapacity);
+    }
+}
+
+private static int calculateCapacity(Object[] elementData, int minCapacity) {
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        //如果是通过new ArrayList()创建,判断容量和默认值10
+        //选大的进行扩容
+        return Math.max(DEFAULT_CAPACITY, minCapacity);
+    }
+    //返回传入参数.
+    return minCapacity;
+}
+
+private void ensureCapacityInternal(int minCapacity) {
+    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
+}
+
+private void ensureExplicitCapacity(int minCapacity) {
+    modCount++;
+
+    // overflow-conscious code
+    if (minCapacity - elementData.length &gt; 0)
+        grow(minCapacity);//调用grow值
+}
+
+/**
+ * arrayList最大的扩容值.因为有的虚拟机实现过程中会使用一部分容量储存其余数据
+ * 所以如果使用全部可能会导致OOM异常.
+ */
+private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+
+/**
+ * 当要扩大容量的时候会传入一个min容量,默认数组是会扩容至原数组的1.5倍大小
+ * 如果min容量&gt;1.5倍的原大小,就会按照min的大小来进行扩容.
+ * 如果目标扩大容量小于原容量的1.5倍的话，那么是按照1.5倍来扩大的。
+ * 如果扩大后的容量是＞最大支持扩容量，就按照Integer.MAX_VALUE来扩容
+ */
+private void grow(int minCapacity) {
+    // overflow-conscious code
+    int oldCapacity = elementData.length;
+    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
+    if (newCapacity - minCapacity &lt; 0)
+        newCapacity = minCapacity;
+    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
+        newCapacity = hugeCapacity(minCapacity);
+    // minCapacity is usually close to size, so this is a win:
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}
+
+private static int hugeCapacity(int minCapacity) {
+    if (minCapacity &lt; 0) // overflow
+        throw new OutOfMemoryError();
+    return (minCapacity &gt; MAX_ARRAY_SIZE) ?
+        Integer.MAX_VALUE :
+        MAX_ARRAY_SIZE;
+}
+</code></pre><h2 id="总结内容"><a href="#总结内容" class="headerlink" title="总结内容"></a>总结内容</h2><ol>
+<li>ArrayList内部是使用数组去储存元素的,但需要扩容的时候,默认是扩容为原本的1.5倍</li>
+<li>ArrayList是线程不安全的,因为有modCount去统计修改次数,可以自己加锁.</li>
+<li>ArrayList支持求并集、差集、交集等</li>
+<li>ArrayList实现了RandomAccess接口，所以使用for循环会比使用迭代器遍历数据快蛮多的</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/28/深入理解JVM-chapter3（一）/" rel="next" title="深入理解JVM-chapter3（一）">
+                <i class="fa fa-chevron-left"></i> 深入理解JVM-chapter3（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Ymon">
+            
+              <p class="site-author-name" itemprop="name">Ymon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList专题"><span class="nav-number">1.</span> <span class="nav-text">ArrayList专题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的继承体系"><span class="nav-number">1.1.</span> <span class="nav-text">ArrayList的继承体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的构建"><span class="nav-number">1.2.</span> <span class="nav-text">ArrayList的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加元素"><span class="nav-number">1.2.1.</span> <span class="nav-text">添加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更改元素"><span class="nav-number">1.2.2.</span> <span class="nav-text">更改元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询元素"><span class="nav-number">1.2.3.</span> <span class="nav-text">查询元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除元素"><span class="nav-number">1.2.4.</span> <span class="nav-text">删除元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求交集、差集"><span class="nav-number">1.3.</span> <span class="nav-text">求交集、差集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#求交集"><span class="nav-number">1.3.1.</span> <span class="nav-text">求交集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求差集"><span class="nav-number">1.3.2.</span> <span class="nav-text">求差集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求并集"><span class="nav-number">1.3.3.</span> <span class="nav-text">求并集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList扩容"><span class="nav-number">1.4.</span> <span class="nav-text">ArrayList扩容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结内容"><span class="nav-number">2.</span> <span class="nav-text">总结内容</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ymon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
