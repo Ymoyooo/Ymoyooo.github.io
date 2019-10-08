@@ -87,7 +87,7 @@
 <meta property="og:description" content="ArrayList专题看了很多大厂，对基础的源码掌握是有一定的要求的。特别是集合啦，在阅读了Java技术驿站的死磕集合系列类的博客后，想要自己记录一下内容，加深自己对集合的理解，掌握。文章会针对集合的增删查改的性能进行源码分析，会讲到是否线程安全，如何扩容，构建，是否支持求并集差集等等的内容。http://cmsblogs.com/?p=4781 文章中会比较多的源码,基本上都有翻译注释的. 首先">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/09/28/u1TjG8.png">
-<meta property="og:updated_time" content="2019-09-29T11:10:28.949Z">
+<meta property="og:updated_time" content="2019-10-05T05:51:35.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArrayList集合">
 <meta name="twitter:description" content="ArrayList专题看了很多大厂，对基础的源码掌握是有一定的要求的。特别是集合啦，在阅读了Java技术驿站的死磕集合系列类的博客后，想要自己记录一下内容，加深自己对集合的理解，掌握。文章会针对集合的增删查改的性能进行源码分析，会讲到是否线程安全，如何扩容，构建，是否支持求并集差集等等的内容。http://cmsblogs.com/?p=4781 文章中会比较多的源码,基本上都有翻译注释的. 首先">
@@ -753,6 +753,7 @@ private static int hugeCapacity(int minCapacity) {
 <li>ArrayList是线程不安全的,因为有modCount去统计修改次数,可以自己加锁.</li>
 <li>ArrayList支持求并集、差集、交集等</li>
 <li>ArrayList实现了RandomAccess接口，所以使用for循环会比使用迭代器遍历数据快蛮多的</li>
+<li>ArrayList使用的是fail-fast机制，在源码中多次出现modcount就是用于检验是否发生了并发修改。</li>
 </ol>
 
       
@@ -787,6 +788,10 @@ private static int hugeCapacity(int minCapacity) {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/LinkedList/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -865,7 +870,7 @@ private static int hugeCapacity(int minCapacity) {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

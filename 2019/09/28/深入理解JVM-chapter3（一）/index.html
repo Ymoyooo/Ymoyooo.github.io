@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="机智">
 <meta property="og:description" content="垃圾收集器与内存分配策略上一张我们了解了Java的内存的分布区域，对内部的几个模型有了大概的了解。大家还记的第二章的时候提到过Java与C语言的不同吗。Java的内存不需要手动的去申请和释放，其中内存的申请我们要到后面几章才会了解到，本章的内容主要是回收内存的方法与策略。回收的过程也称之为垃圾收集（Garbage Collection，GC），内存表示很难过当初答应赋予价值给我的是你，现在利用完了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-28T10:11:45.425Z">
+<meta property="og:updated_time" content="2019-10-08T03:58:19.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JVM-chapter3（一）">
 <meta name="twitter:description" content="垃圾收集器与内存分配策略上一张我们了解了Java的内存的分布区域，对内部的几个模型有了大概的了解。大家还记的第二章的时候提到过Java与C语言的不同吗。Java的内存不需要手动的去申请和释放，其中内存的申请我们要到后面几章才会了解到，本章的内容主要是回收内存的方法与策略。回收的过程也称之为垃圾收集（Garbage Collection，GC），内存表示很难过当初答应赋予价值给我的是你，现在利用完了">
@@ -303,7 +303,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  984
+                  1.1k
                 </span>
               
 
@@ -344,13 +344,14 @@
 <ol>
 <li>哪些内存需要回收？</li>
 <li>什么时候回收？</li>
-<li>如何回收？</li>
+<li>如何回收？<br>三个问题我们会分为三个小节来记录。</li>
 </ol>
 <h3 id="确认需要回收的内存"><a href="#确认需要回收的内存" class="headerlink" title="确认需要回收的内存"></a>确认需要回收的内存</h3><h4 id="线程私有的内存运行时模块"><a href="#线程私有的内存运行时模块" class="headerlink" title="线程私有的内存运行时模块"></a>线程私有的内存运行时模块</h4><p>在第二章我们提到了,程序计数器,虚拟机栈,本地方法栈三个区域是线程私有的,方法栈帧随着方法的进入和退出会不断的把栈帧按秩序进行入栈和出栈操作,而且每个栈帧在一开始便已经有了确认的内存大小空间,所以他们的回收和分配内存是在类结构确定下来时候就定了的.所有我们GC不过多的关注这几个具体区域的实现.GC主要的区域是Java堆,因为Java堆是绝大多数对象存放的位置,对象的生成是一个不确定的过程,在程序运行的任何时候都有可能有新的对象生成,这部分的内存的分配和回收都是动态的.</p>
 <h4 id="Java堆内的内存回收"><a href="#Java堆内的内存回收" class="headerlink" title="Java堆内的内存回收"></a>Java堆内的内存回收</h4><p>回收一个对象的内存的前提是,<strong>对象已死</strong>,即它对程序的运行已经不发生作用了,是不可能再被任何途径使用的对象.那么如何判断对象是否已死?JVM书内提供了两种算法,分别是引用计数法和可达性分析算法.下面分开来介绍</p>
 <h5 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h5><p>当一个对象刚刚生成的时候我们把引用置为1,每当它被引用的时候对应的值+1,相反每当它的引用被释放的时候,对应的值-1.当一个对象的引用为0的时候,说明它已经不能再被使用,代表它已死,可以回收.引用计数法的实现原理简单,判定效率高,但是它有着一些弊端,下面提供样例方便理解.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//初次创建的时候，objA、objB的应用值都为1</span></span><br><span class="line">GCObject objA = <span class="keyword">new</span> GCObject();</span><br><span class="line">GCObject objB = <span class="keyword">new</span> GCObject();</span><br><span class="line"></span><br><span class="line"><span class="comment">//应用值都为2了</span></span><br><span class="line">objA.instance = objB.instance;</span><br><span class="line">objB.instance = objA.instance;</span><br><span class="line"></span><br><span class="line"><span class="comment">//应用值都为1了</span></span><br><span class="line">objA=<span class="keyword">null</span>;</span><br><span class="line">objB=<span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">System.gc();</span><br></pre></td></tr></table></figure></p>
 <p>如果按照应用方法他们两的应用都不为0，所以并不会被回收。但按照常理应该两个对象应该都被回收才正确。这就是引用计数算法的弊端，没有办法解决循环应用的情况。因此JVM也没有使用引用计数算法。</p>
-<h5 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h5><p>在JVM中是使用可达性分析算法来判断对象是否已死的。可达性算法就是判断对象是否存在一条引用链到GC Roots对象。解释一下引用链和GC Roots，GC Roots对象主要由三部分组成，一是虚拟机栈（栈帧中的本地向量表）中应用的对象，二是方法区中静态引用的对象，三是方法区中常量引用对象，四是本地方法栈中JNI引用的对象。</p>
+<h5 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h5><p>在JVM中是使用可达性分析算法来判断对象是否已死的。可达性算法就是判断对象是否存在一条引用链到GC Roots对象。解释一下引用链和GC Roots，GC Roots对象主要由三部分组成，一是虚拟机栈（栈帧中的本地向量表）中应用的对象，二是方法区中静态引用的对象，三是方法区中常量引用对象，四是本地方法栈中JNI引用的对象。引用链便是以GC Roots为起点去寻找其被引用的路径，只要某对象的成员中含有其引用，便把该对象加到引用链中。在引用链外的都是不可达对象，判定为可回收对象。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上便是我们在定义垃圾中使用到的方法。现在商业化的虚拟机基本都是采用了可达性分析算法来确定垃圾的。</p>
 
       
     </div>
@@ -466,7 +467,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -512,7 +513,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集器与内存分配策略"><span class="nav-number">1.</span> <span class="nav-text">垃圾收集器与内存分配策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确认需要回收的内存"><span class="nav-number">2.</span> <span class="nav-text">确认需要回收的内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程私有的内存运行时模块"><span class="nav-number">2.1.</span> <span class="nav-text">线程私有的内存运行时模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java堆内的内存回收"><span class="nav-number">2.2.</span> <span class="nav-text">Java堆内的内存回收</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引用计数法"><span class="nav-number">2.2.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可达性分析算法"><span class="nav-number">2.2.2.</span> <span class="nav-text">可达性分析算法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集器与内存分配策略"><span class="nav-number">1.</span> <span class="nav-text">垃圾收集器与内存分配策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确认需要回收的内存"><span class="nav-number">2.</span> <span class="nav-text">确认需要回收的内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程私有的内存运行时模块"><span class="nav-number">2.1.</span> <span class="nav-text">线程私有的内存运行时模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java堆内的内存回收"><span class="nav-number">2.2.</span> <span class="nav-text">Java堆内的内存回收</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引用计数法"><span class="nav-number">2.2.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可达性分析算法"><span class="nav-number">2.2.2.</span> <span class="nav-text">可达性分析算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

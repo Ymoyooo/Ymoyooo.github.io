@@ -79,20 +79,26 @@
 
 
 
-<meta name="description" content="在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。 首先我们了解一下什么是Tomcat。 Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。 Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。  图中的Server即代表着Tomcat。 为什么我们要使用To">
+<meta name="description" content="垃圾收集算法上一章我们了解了如何定义垃圾，既然我们知道如何定义垃圾了，下一步来看JVM是如何回收这些垃圾，解放内存的。垃圾收集算法主要分成3+1种，后面会解释特殊的一种的内容。  标记清除算法 标记整理算法 复制算法  标记清除算法 首先我们先遍历一遍要标记的区域，检查每个对象的可达性情况，紫色代表被使用的空间，白色代表未被占用的空间。   图：内存占用情况如果它是不可达的，那么我们将会标记成为可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简单了解Tomcat">
-<meta property="og:url" content="http://yoursite.com/2019/02/16/简单了解Tomcat/index.html">
+<meta property="og:title" content="深入理解JVM-chapter3（二）">
+<meta property="og:url" content="http://yoursite.com/2019/10/08/深入理解JVM-chapter3（二）/index.html">
 <meta property="og:site_name" content="机智">
-<meta property="og:description" content="在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。 首先我们了解一下什么是Tomcat。 Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。 Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。  图中的Server即代表着Tomcat。 为什么我们要使用To">
+<meta property="og:description" content="垃圾收集算法上一章我们了解了如何定义垃圾，既然我们知道如何定义垃圾了，下一步来看JVM是如何回收这些垃圾，解放内存的。垃圾收集算法主要分成3+1种，后面会解释特殊的一种的内容。  标记清除算法 标记整理算法 复制算法  标记清除算法 首先我们先遍历一遍要标记的区域，检查每个对象的可达性情况，紫色代表被使用的空间，白色代表未被占用的空间。   图：内存占用情况如果它是不可达的，那么我们将会标记成为可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/mSljGmI.png">
-<meta property="og:image" content="https://i.imgur.com/l27jnTM.png">
-<meta property="og:updated_time" content="2019-02-16T06:27:07.188Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWHn76.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWHKAK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWHOUK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWbarR.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWq1OA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWq0yj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWLKA0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/08/uWODI0.png">
+<meta property="og:updated_time" content="2019-10-08T05:25:07.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简单了解Tomcat">
-<meta name="twitter:description" content="在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。 首先我们了解一下什么是Tomcat。 Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。 Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。  图中的Server即代表着Tomcat。 为什么我们要使用To">
-<meta name="twitter:image" content="https://i.imgur.com/mSljGmI.png">
+<meta name="twitter:title" content="深入理解JVM-chapter3（二）">
+<meta name="twitter:description" content="垃圾收集算法上一章我们了解了如何定义垃圾，既然我们知道如何定义垃圾了，下一步来看JVM是如何回收这些垃圾，解放内存的。垃圾收集算法主要分成3+1种，后面会解释特殊的一种的内容。  标记清除算法 标记整理算法 复制算法  标记清除算法 首先我们先遍历一遍要标记的区域，检查每个对象的可达性情况，紫色代表被使用的空间，白色代表未被占用的空间。   图：内存占用情况如果它是不可达的，那么我们将会标记成为可">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/10/08/uWHn76.png">
 
 
 
@@ -122,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/16/简单了解Tomcat/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/08/深入理解JVM-chapter3（二）/">
 
 
 
 
 
-  <title>简单了解Tomcat | 机智</title>
+  <title>深入理解JVM-chapter3（二） | 机智</title>
   
 
 
@@ -245,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/简单了解Tomcat/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/深入理解JVM-chapter3（二）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ymon">
@@ -262,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">简单了解Tomcat</h1>
+          <h1 class="post-title" itemprop="name headline">深入理解JVM-chapter3（二）</h1>
         
 
         <div class="post-meta">
@@ -274,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T13:51:54+08:00">
-                2019-02-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T11:59:21+08:00">
+                2019-10-08
               </time>
             
 
@@ -306,7 +312,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  639
+                  1.5k
                 </span>
               
 
@@ -322,7 +328,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -343,40 +349,28 @@
       
 
       
-        <p>在学习的过程中，高频率的见到Tomcat这个词，所以有必要对Tomcat作一定程度上的理解。</p>
-<h4 id="首先我们了解一下什么是Tomcat。"><a href="#首先我们了解一下什么是Tomcat。" class="headerlink" title="首先我们了解一下什么是Tomcat。"></a>首先我们了解一下什么是Tomcat。</h4><blockquote>
-<p><strong>Tomcat是一个Web应用服务器，同时也是一个Servlet/JSP的容器。</strong></p>
-<p>Tomcat作为一个Servlet容器的作用，主要是把请求对象交给合适的Servlet。然后把返回的响应对象再返回给客户。</p>
-</blockquote>
-<p><img src="https://i.imgur.com/mSljGmI.png" alt=""><br>图中的Server即代表着Tomcat。</p>
-<h3 id="为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？"><a href="#为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？" class="headerlink" title="为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？"></a>为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？</h3><p>下面归纳一下容器的主要功能</p>
+        <h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><p>上一章我们了解了如何定义垃圾，既然我们知道如何定义垃圾了，下一步来看JVM是如何回收这些垃圾，解放内存的。<br>垃圾收集算法主要分成3+1种，后面会解释特殊的一种的内容。</p>
 <ol>
-<li>通信支持<br> 容器能为编程人员在servlet和客户之间搭上一栋桥梁，无需自己建立ServerSocket、监听端口、创建流。容器和Web服务器还达成了既定的协议，不必担心Web代码中的API。</li>
-<li>生命周期管理<br> 容器负责创建servlet，也负责销毁servlet。**加载类、实例化、初始化servlet、调用servlet方法，垃圾回收等，都是由容器负责</li>
-<li>多线程支持<br> 容器负责为每个请求建立线程，并管理线程的运作。</li>
-<li>声明方式实现安全<br> 可以使用XML部署描述文件来配置安全性，易修改。</li>
-<li>JSP支持 容器负责把JSP翻译成JAVA</li>
+<li>标记清除算法</li>
+<li>标记整理算法</li>
+<li>复制算法</li>
 </ol>
-<h2 id="容器如何接受一个请求"><a href="#容器如何接受一个请求" class="headerlink" title="容器如何接受一个请求"></a>容器如何接受一个请求</h2><ol>
-<li>确认是否找的就是Servlet，如果只是单纯的拿取文件就不需要用到servlet。</li>
-<li>建立HttpServletRequest，HttpServletResponse，两个对象。</li>
-<li>找到Servlet，分配线程，传递Req、Res对象给相对应的Servlet</li>
-<li>收到请求对象的Servlet根据请求类型调用响应方法。</li>
-<li>第四条生成的页面会被填在响应对象里面.</li>
-<li>响应对象返回给客户   </li>
-</ol>
-<p>上面第三点提到了，容器要找到一个特定的Servlet，再去为他分配线程。<br>出于安全考虑，容器是通过映射来找到Servlet的，每个Servlet可以有三个名称。</p>
-<blockquote>
-<ol>
-<li>实际类名(完全限定名)</li>
-<li>部署名(内部名)</li>
-<li>公共URL名称(公共URL名)     </li>
-</ol>
-</blockquote>
-<p>ps.这样的做法让我们不用暴露目录结构，也更方便后期文件的调整。</p>
-<p><strong>容器会在某特定位置按照映射名称查找全部servlet</strong></p>
-<p>客户直接看到的是公共的URL名称，部署名是编程人员自个知道的秘密名称。在部署描述文件(DD)中写好之间的映射，如图。<br><img src="https://i.imgur.com/l27jnTM.png" alt=""></p>
-<p>想了解Apache和Tomcat的关联和区别：<br><a href="https://www.cnblogs.com/zangdalei/p/8057325.html" target="_blank" rel="noopener">https://www.cnblogs.com/zangdalei/p/8057325.html</a><br><a href="https://www.cnblogs.com/zaifeng0108/p/7226380.html" target="_blank" rel="noopener">https://www.cnblogs.com/zaifeng0108/p/7226380.html</a>                                                                                                                                                                                                                                                                                                        </p>
+<h5 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h5><hr>
+<p>首先我们先遍历一遍要标记的区域，检查每个对象的可达性情况，紫色代表被使用的空间，白色代表未被占用的空间。<br> <div align="center"><br><img align="center" src="https://s2.ax1x.com/2019/10/08/uWHn76.png" alt="uWHn76.png" border="0"><br></div><br>  </p><p align="center">图：内存占用情况</p><br>如果它是不可达的，那么我们将会标记成为可回收对象。在图中我们标记为<strong>红色</strong>。<br> <div align="center"><br><img src="https://s2.ax1x.com/2019/10/08/uWHKAK.png" alt="uWHKAK.png" border="0"><br></div><br>  <p align="center">图：标记可回收对象</p><p></p>
+<p>还记得我们这个叫什么什么算法嘛，标记还有清除。标记完成了，下一步就是清除，也就是回收内存了。</p>
+<p><div align="center"><br><img src="https://s2.ax1x.com/2019/10/08/uWHOUK.png" alt="uWHOUK.png" border="0"><br></div><br>  </p><p align="center">图：回收后</p><p></p>
+<p>这就是标记清除算法的整个流程。大家看到这个过程其实很简单，但是这样收集出来的效果却不太好。因为可以很直观的看到被收回后的区域，七零八碎的。内存空间不连续会导致我们没办法给大的对象进行分配的空间，也就意味着可能要再进行一次GC，这样极大地降低了效率。后面两种方案不同程度的在这上面做出了改进。</p>
+<h5 id="标记整理算法"><a href="#标记整理算法" class="headerlink" title="标记整理算法"></a>标记整理算法</h5><hr>
+<p>清除变成了整理，相信大家已经有个大概的想法了。标记清除最大的弊端就是内存空间回收后会产生很多小的空隙，导致我们没办法安排大的对象，从而影响效率。标记整理方法中引入了压缩的概念，何为压缩，就是把分配出来的空间放在一边，未利用的放在另外一边。核心思想就是把存货的对象往一边移动，然后清理掉边界外的内存。由于遍历、标记这个步骤和标记清除法一样，就不重复贴了。</p>
+<p><div align="center"><br><img src="https://s2.ax1x.com/2019/10/08/uWbarR.png" alt="uWbarR.png" border="0"><br></div></p>
+<p align="center">图：采用整理方法回收后</p><br>经过压缩后的内存空间可利用率更高，但是前提是虚拟机要支持压缩技术。<br><br>##### 复制算法<br><br>———-<br>复制算法的出现也是为了提高效率问题，复制算法主要运用在新生代，先不用担心不了解新生代的内容，后面会讲解到。复制算法的实现与标记法大不相同，复制算法对内存的划分又做了一层定义。橙色线的左端被标为了A区域，右端被标为了B区域。每次我们只使用一边的区域。像现在的A区域，分配内存会首先在A区域进行分配，如果内存不够了，我们就会进行复制算法。复制算法此时就会把可用的对象复制到B区域中去，然后把A区域清空，这便是复制算法。<br><div align="center"><br><img src="https://s2.ax1x.com/2019/10/08/uWq1OA.png" alt="uWq1OA.png" border="0"><br></div><br><p align="center">图：采用复制算法划分的区域</p><br>把A区域对象复制到B区域中去，然后清除A区域。<br><div align="center"><br><img src="https://s2.ax1x.com/2019/10/08/uWq0yj.png" alt="uWq0yj.png" border="0"><br></div><br><p align="center">图：复制算法实行后的区域</p><br>原理很简单，缺点也很明显。他会浪费掉很大的空间。每次区域的划分都要留一半空出来，听起来就很浪费！但事实不是这样的，因为在新生代中的对象，超过九成都是“朝生夕死”，什么意思呢。就是复制算法会回收掉区域内的绝大多数内存，所剩下的对象占用的区域会很小很小，所以我们可以合理的规划复制算法中的区域，从而享受到算法的快捷之处，也不会担心浪费空间。<br>新生代中通常会把区域分成十等份，如图。a区域与b区域共用，c区域作待用空间。等a,b区域的对象回收过后，就可以复制剩余得到c区域内。这样每次被闲置的空间小了很多。当然也会出现说c区域不够大的情况，这时候就需要进行一个<strong>分配担保</strong>了，经过分配担保后我们可以把内容放置到另一个区域块中，称之为老生代，后面会讲解。<br><div align="center"><br><img src="https://s2.ax1x.com/2019/10/08/uWLKA0.png" alt="uWLKA0.png" border="0"><br></div><br><p align="center">图：使用复制算法的区域划分</p>
+
+<h5 id="分代算法"><a href="#分代算法" class="headerlink" title="分代算法"></a>分代算法</h5><hr>
+<p>在上面的内容中，提及的新生代、老生代就是出自此处。现在基本所有的虚拟机都实现了分代算法，分为新生代，老生代。下面来讲解。新生代，顾名思义就是刚来的，我们曾经提及对象基本上都是朝生夕死的，很多对象根本活不了多久，所以基本上对象的一生都会在新生代中度过，只有极少数可以存活到老生代。<br>这样也产生了一些特性，在回收新生代的时候，现在的解决方案大多都是复制算法，在老生代中常用的就是标记整理和标记清除算法。<br>一开始的对象会在FromServivor和Eden中自由生长，直到复制算法来回收他们。回收后的对象会被复制到ToServivor中，新来的对象继续在FromServivor和Eden中自由生长。</p>
+<p><div align="center"><br><img src="https://s2.ax1x.com/2019/10/08/uWODI0.png" alt="uWODI0.png" border="0"><br></div></p>
+<p align="center">图：新生代中区域的划分</p>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本小节内容主要是介绍一下回收的算法。主要有三种算法，标记-清除算法，标记-整理算法，复制算法三种。清除算法的缺点是会产生不连续的内存碎片，不利于大对象的分配。复制算法的缺点是会比较占用空间，需要合理的规划空间。下面一节我们将讲讲这些算法的具体实现的垃圾收集器，以及它们平时使用的区域。</p>
 
       
     </div>
@@ -401,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/08/学习Servlet-JSP-chapter1/" rel="next" title="学习Servlet&JSP chapter1">
-                <i class="fa fa-chevron-left"></i> 学习Servlet&JSP chapter1
+              <a href="/2019/09/29/LinkedList/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -410,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/16/学习Servlet-JSP-chapter2/" rel="prev" title="学习Servlet&JSP chapter2">
-                学习Servlet&JSP chapter2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -538,7 +528,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先我们了解一下什么是Tomcat。"><span class="nav-number">1.</span> <span class="nav-text">首先我们了解一下什么是Tomcat。</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？"><span class="nav-number"></span> <span class="nav-text">为什么我们要使用Tomcat这个容器呢？容器到底能帮助到我什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器如何接受一个请求"><span class="nav-number"></span> <span class="nav-text">容器如何接受一个请求</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">1.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#标记清除算法"><span class="nav-number">1.0.1.</span> <span class="nav-text">标记清除算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标记整理算法"><span class="nav-number">1.0.2.</span> <span class="nav-text">标记整理算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分代算法"><span class="nav-number">1.0.3.</span> <span class="nav-text">分代算法</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></div>
             
 
           </div>
